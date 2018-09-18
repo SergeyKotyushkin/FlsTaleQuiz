@@ -5,7 +5,7 @@
         baseUrl: "./",
         paths: {
             "knockout": "scripts/vendor/knockout-3.4.2",
-            "jquery": "scripts/vendor/jquery-3.3.1",
+            "jquery": "scripts/vendor/jquery-3.3.1.min",
             "knockout.validation": "scripts/vendor/plugins/knockout.validation",
             "text": "scripts/vendor/plugins/text",
             "json": "scripts/vendor/plugins/json"

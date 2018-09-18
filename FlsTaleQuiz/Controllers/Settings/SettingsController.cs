@@ -13,7 +13,7 @@ namespace FlsTaleQuiz.Controllers.Settings
         {
             var settings = new
             {
-                CountOfQuestions = 2
+                CountOfQuestions = 10
             };
 
             var labels = new

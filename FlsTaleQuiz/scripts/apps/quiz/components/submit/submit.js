@@ -1,9 +1,10 @@
 ﻿define([
         'knockout',
+        'jquery',
         'json!settings/quizOptions',
         'knockout.validation'
     ],
-    function(ko, options) {
+    function(ko, $, options) {
         'use strict';
 
         return function(params) {
@@ -12,7 +13,8 @@
             var labels = options && options.labels || {};
 
             _initValidation.call(self, labels);
-
+            
+            self.loading = params && params.loading;
             self.userAnswers = params && params.userAnswers || [];
             self.showFinish = params && params.showFinish;
 
@@ -26,7 +28,6 @@
             var submitButtonClick = _submit.bind(self);
 
             return {
-                result: JSON.stringify(ko.toJSON(self.userAnswers)),
                 firstName: self.firstName,
                 lastName: self.lastName,
                 email: self.email,
@@ -75,7 +76,32 @@
                 return;
             }
 
-            self.showFinish();
+            _saveResults.call(self);
+        }
+
+        function _saveResults() {
+            var self = this;
+
+            self.loading(true);
+            $.post('result/saveResults',
+                    {
+                        firstName: self.firstName(),
+                        lastName: self.lastName(),
+                        email: self.email(),
+                        userAnswers: self.userAnswers()
+                    },
+                    function _onSuccess(result) {
+                        console.log(JSON.stringify(result));
+                        self.showFinish();
+                    },
+                    'json'
+                )
+                .fail(function _onError() {
+                    console.log("error");
+                })
+                .always(function _always() {
+                    self.loading(false);
+                });
         }
     }
 );

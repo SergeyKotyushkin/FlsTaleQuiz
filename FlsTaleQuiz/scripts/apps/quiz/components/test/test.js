@@ -1,8 +1,9 @@
 ﻿define([
         'knockout',
+        'jquery',
         'json!settings/quizOptions'
     ],
-    function(ko, options) {
+    function(ko, $, options) {
         'use strict';
 
         return function(params) {
@@ -12,6 +13,7 @@
             var settings = options && options.settings || {};
 
             self.loading = params && params.loading;
+            self.userAnswers = params && params.userAnswers;
             self.showSubmit = params && params.showSubmit;
             self.addUserAnswer = params && params.addUserAnswer;
 
@@ -56,18 +58,29 @@
             var self = this;
 
             self.loading(true);
-            self.currentQuestion({
-                id: '1',
-                imageUrl:
-                    'https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Auto_Racing_Green.svg/800px-Auto_Racing_Green.svg.png',
-                text: 'some text',
-                answers: [
-                    { id: 1, text: 'Answer1' }, { id: 2, text: 'Answer2' }, { id: 3, text: 'Answer3' },
-                    { id: 4, text: 'Answer4' }
-                ]
-            });
-            _incrementCurrentQuestionNumber.call(self);
-            self.loading(false);
+            $.post('question/getRandom',
+                    {
+                        excludedQuestionsIds: self.userAnswers().map(function
+                            _mapQuestionId(userAnswer) {
+                                return userAnswer.questionId;
+                            })
+                    },
+                    function _onSuccess(result) {
+                        if (!result || !result.question) {
+                            return;
+                        }
+
+                        self.currentQuestion(result.question);
+                        _incrementCurrentQuestionNumber.call(self);
+                    },
+                    'json'
+                )
+                .fail(function _onError() {
+                    console.log("error");
+                })
+                .always(function _always() {
+                    self.loading(false);
+                });
         }
 
         function _incrementCurrentQuestionNumber() {
