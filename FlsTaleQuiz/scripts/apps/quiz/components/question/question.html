@@ -1,0 +1,19 @@
+﻿<div>
+    <img data-bind="attr: {src: imageUrl}"/>
+</div>
+
+<!-- ko if: text.length -->
+<div>
+    <p data-bind="text: text"></p>
+</div>
+<!-- /ko -->
+
+<div data-bind="foreach: {data: answers, as: 'answer'}">
+    <label data-bind="text: answer.text, attr: {for: answer.id}"></label>
+    <input type="radio" data-bind="value: answer.id, checked: $parent.selectedAnswerId, attr: {id: answer.id}"/>
+    <hr/>
+</div>
+
+<div>
+    <input type="button" data-bind="enable: selectedAnswerId, click: answerButtonClick, value: answerButtonLabel" />
+</div>

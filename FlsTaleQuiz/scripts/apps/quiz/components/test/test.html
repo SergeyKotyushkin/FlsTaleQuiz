@@ -1,0 +1,7 @@
+﻿<div>
+    <div data-bind="text: currentQuestionNumberLabel"></div>
+    <br/>
+    <!-- ko if: currentQuestion -->
+    <div data-bind='component: { name: "question", params: { question: currentQuestion(), nextQuestionHandler: nextQuestionClick, addUserAnswer: addUserAnswer } }'></div>
+    <!-- /ko -->
+</div>

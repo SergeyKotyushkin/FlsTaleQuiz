@@ -1,0 +1,28 @@
+﻿<!--<div data-bind="text: 'Question #' + number() + ' of ' + questionsCount()"></div>-->
+
+<div>
+    <h1>Submit</h1>
+    <div data-bind="text: result"></div>
+
+    <div>
+        <div data-bind="text: firstNameLabel"></div>
+        <input data-bind="value: firstName" />
+        <div data-bind="validationMessage: firstName"></div>
+    </div>
+    <br />
+    <div>
+        <div data-bind="text: lastNameLabel"></div>
+        <input data-bind="value: lastName" />
+        <div data-bind="validationMessage: lastName"></div>
+    </div>
+    <br />
+    <div>
+        <div data-bind="text: emailLabel"></div>
+        <input data-bind="value: email" />
+        <div data-bind="validationMessage: email"></div>
+    </div>
+    <br />
+    <div>
+        <input type="button" data-bind="enable: isReadyForSubmit, click: submitButtonClick, value: submitButtonLabel" />
+    </div>
+</div>

@@ -44,6 +44,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -89,10 +92,34 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="scripts\apps\quiz\components\intro\intro.html" />
+    <Content Include="scripts\apps\quiz\components\intro\intro.js" />
+    <Content Include="scripts\apps\quiz\components\finish\finish.html" />
+    <Content Include="scripts\apps\quiz\components\finish\finish.js" />
+    <Content Include="scripts\apps\quiz\components\test\test.html" />
+    <Content Include="scripts\apps\quiz\components\test\test.js" />
+    <Content Include="scripts\apps\quiz\components\submit\submit.html" />
+    <Content Include="scripts\apps\quiz\components\submit\submit.js" />
+    <Content Include="scripts\apps\quiz\components\question\question.html" />
+    <Content Include="scripts\apps\quiz\components\question\question.js" />
+    <Content Include="scripts\apps\quiz\quiz.vm.js" />
+    <Content Include="scripts\apps\quiz\quiz.app.js" />
+    <Content Include="scripts\apps\quiz\quiz.config.js" />
+    <Content Include="scripts\apps\quiz\setup\component-factory.js" />
+    <Content Include="scripts\apps\quiz\setup\component-registrator.js" />
+    <Content Include="scripts\vendor\jquery-3.3.1.min.js" />
+    <Content Include="scripts\vendor\knockout-3.4.2.js" />
+    <Content Include="scripts\vendor\plugins\json.js" />
+    <Content Include="scripts\vendor\plugins\knockout.validation.js" />
+    <Content Include="scripts\vendor\plugins\text.js" />
+    <Content Include="scripts\vendor\require.js" />
+    <Content Include="scripts\vendor\require.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\Home\HomeController.cs" />
+    <Compile Include="Controllers\Settings\SettingsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -101,6 +128,9 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <None Include="packages.config" />
+    <Content Include="Views\_viewstart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -110,7 +140,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
