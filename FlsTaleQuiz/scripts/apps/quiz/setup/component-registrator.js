@@ -1,5 +1,5 @@
-﻿define(["knockout"], function componentRegistrator(ko) {
-    "use strict";
+﻿define(['knockout'], function componentRegistrator(ko) {
+    'use strict';
 
     return {
         register: _register

@@ -1,16 +1,16 @@
 ﻿define([
-        "knockout",
-        "scripts/apps/quiz/quiz.vm"
+        'knockout',
+        'scripts/apps/quiz/quiz.vm'
     ],
     function quizAppModule(ko, QuizViewModel) {
-        "use strict";
+        'use strict';
 
         return {
             initialize: _initialize
         };
 
         function _initialize(domElement, settings) {
-            console.log("Quiz App loaded");
+            console.log('Quiz App loaded');
 
             var quiz = new QuizViewModel();
 

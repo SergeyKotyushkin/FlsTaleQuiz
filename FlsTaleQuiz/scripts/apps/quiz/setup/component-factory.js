@@ -1,5 +1,5 @@
 ﻿define([], function componentFactory() {
-    "use strict";
+    'use strict';
 
     var componentBasePath = 'scripts/apps/quiz/components/';
     var componentViewModelFormat = componentBasePath + '{0}/{0}.js';

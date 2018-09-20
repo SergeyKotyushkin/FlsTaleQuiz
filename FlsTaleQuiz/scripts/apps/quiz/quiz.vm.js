@@ -1,9 +1,8 @@
 ﻿define([
-        'knockout'//,
-        //'json!settings/quizSettings'
+        'knockout'
     ],
-    function quizViewModelModule(ko, settings) {
-        "use strict";
+    function quizViewModelModule(ko) {
+        'use strict';
 
         return QuizViewModel;
 

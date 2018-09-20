@@ -76,7 +76,7 @@
                     'json'
                 )
                 .fail(function _onError() {
-                    console.log("error");
+                    console.log('error');
                 })
                 .always(function _always() {
                     self.loading(false);
