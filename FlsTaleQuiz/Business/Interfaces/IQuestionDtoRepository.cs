@@ -6,5 +6,7 @@ namespace FlsTaleQuiz.Business.Interfaces
     public interface IQuestionDtoRepository
     {
         QuestionDto GetRandom(IEnumerable<long> excludedQuestionsIds);
+
+        QuestionDto[] GetByIds(IEnumerable<long> questionsIds);
     }
 }

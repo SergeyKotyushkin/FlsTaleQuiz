@@ -19,6 +19,11 @@ namespace FlsTaleQuiz.Business.Repositories
             return GetQuestionsDtos()[index];
         }
 
+        public QuestionDto[] GetByIds(IEnumerable<long> questionsIds)
+        {
+            return GetQuestionsDtos().Where(q => questionsIds.Contains(q.Id)).ToArray();
+        }
+
         private List<QuestionDto> GetQuestionsDtos()
         {
             var questionsDtosList = new List<QuestionDto>();

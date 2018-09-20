@@ -20,7 +20,7 @@ namespace FlsTaleQuiz.Business.Repositories
 
             for (var i = 0; i < AnswersDtosCount; i++)
             {
-                answersDtosList.Add(new AnswerDto {Id = i, Text = "Answer " + i});
+                answersDtosList.Add(new AnswerDto {Id = i, Text = "Answer " + i, IsRight = i % 4 == 0});
             }
 
             return answersDtosList;

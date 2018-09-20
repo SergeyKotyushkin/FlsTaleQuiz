@@ -134,6 +134,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
+    <Compile Include="Business\Constants\Constants.cs" />
     <Compile Include="Business\Interfaces\IQuestionAnswerLinkDtoRepository.cs" />
     <Compile Include="Business\Interfaces\IAnswerDtoRepository.cs" />
     <Compile Include="Business\Interfaces\IQuestionDtoRepository.cs" />

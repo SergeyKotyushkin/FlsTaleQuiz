@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using FlsTaleQuiz.Business.Constants;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -13,32 +14,32 @@ namespace FlsTaleQuiz.Controllers.Settings
         {
             var settings = new
             {
-                CountOfQuestions = 10
+                Constants.Settings.CountOfQuestions
             };
 
             var labels = new
             {
                 // intro component
-                StartTestButtonLabel = "<Start test button>",
+                Constants.Labels.StartTestButtonLabel,
 
                 // test component
-                CurrentQuestionNumberLabelFormat = "<Question #{0} of {1}>",
+                Constants.Labels.CurrentQuestionNumberLabelFormat,
 
                 // question component
-                AnswerButtonLabel = "<To answer>",
+                Constants.Labels.AnswerButtonLabel,
 
                 // submit component
-                FirstNameLabel = "<First Name>",
-                LastNameLabel = "<Last Name>",
-                EmailLabel = "<Email>",
-                SubmitButtonLabel = "<Submit>",
-                FirstNameRequiredMessage ="<First Name is required>",
-                LastNameRequiredMessage ="<Last Name is required>",
-                EmailRequiredMessage ="<Email is required>",
-                EmailIncorrectMessage ="<Email is incorrect>",
+                Constants.Labels.FirstNameLabel,
+                Constants.Labels.LastNameLabel,
+                Constants.Labels.EmailLabel,
+                Constants.Labels.SubmitButtonLabel,
+                Constants.Labels.FirstNameRequiredMessage,
+                Constants.Labels.LastNameRequiredMessage,
+                Constants.Labels.EmailRequiredMessage,
+                Constants.Labels.EmailIncorrectMessage,
 
                 // finish component
-                FinishText = "<Finish>"
+                Constants.Labels.FinishText
             };
 
             return JsonConvert.SerializeObject(new {settings, labels}, JsonSerializerSettings);
