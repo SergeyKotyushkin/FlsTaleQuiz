@@ -49,6 +49,7 @@ AS
 BEGIN
 	SELECT
 		AID
+	   ,QID
 	   ,Title
 	   ,Valid
 	FROM Answers

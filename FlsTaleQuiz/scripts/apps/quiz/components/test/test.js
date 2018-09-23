@@ -9,7 +9,6 @@
         return function(params) {
             var self = this;
 
-            var labels = options && options.labels || {};
             var settings = options && options.settings || {};
 
             self.loading = params && params.loading;
@@ -21,27 +20,17 @@
             self.currentQuestionNumber = ko.observable(0);
 
             self.countOfQuestions = settings.countOfQuestions || 1;
-            self.currentQuestionNumberLabelFormat = labels.currentQuestionNumberLabelFormat || '[Question #{0} of {1}]';
-
-            self.currentQuestionNumberLabel = ko.pureComputed(_constructCurrentQuestionNumberLabel.bind(self));
-
+            
             _loadQuestion.call(self);
 
             return {
-                currentQuestionNumberLabel: self.currentQuestionNumberLabel,
                 nextQuestionClick: _nextQuestionClick.bind(self),
                 currentQuestion: self.currentQuestion,
-                addUserAnswer: self.addUserAnswer
+                addUserAnswer: self.addUserAnswer,
+                currentQuestionNumber: self.currentQuestionNumber,
+                countOfQuestions: self.countOfQuestions
             };
         };
-
-        function _constructCurrentQuestionNumberLabel() {
-            var self = this;
-
-            return self.currentQuestionNumberLabelFormat
-                .replace('{0}', self.currentQuestionNumber())
-                .replace('{1}', self.countOfQuestions);
-        }
 
         function _nextQuestionClick() {
             var self = this;

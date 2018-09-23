@@ -1,17 +1,9 @@
-﻿define([
-        'json!settings/quizOptions'
-    ],
-    function(options) {
+﻿define([],
+    function() {
         'use strict';
 
         return function() {
-            var labels = options && options.labels || {};
-
-            var finishText = labels.finishText || '[Finish]';
-
-            return {
-                finishText: finishText
-            };
+            return {};
         };
     }
 );

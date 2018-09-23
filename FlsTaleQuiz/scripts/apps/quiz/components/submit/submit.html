@@ -1,23 +1,26 @@
 ﻿<div>
     <div>
-        <div data-bind="text: firstNameLabel"></div>
-        <input data-bind="value: firstName" />
-        <div data-bind="validationMessage: firstName"></div>
-    </div>
-    <br />
-    <div>
-        <div data-bind="text: lastNameLabel"></div>
-        <input data-bind="value: lastName" />
-        <div data-bind="validationMessage: lastName"></div>
-    </div>
-    <br />
-    <div>
-        <div data-bind="text: emailLabel"></div>
+        <div>Email<span>*</span></div>
         <input data-bind="value: email" />
         <div data-bind="validationMessage: email"></div>
     </div>
     <br />
     <div>
-        <input type="button" data-bind="enable: isReadyForSubmit, click: submitButtonClick, value: submitButtonLabel" />
+        <div>Name</div>
+        <input data-bind="value: name" />
+    </div>
+    <br />
+    <div>
+        <div>Phone</div>
+        <input data-bind="value: phone" />
+    </div>
+    <br />
+    <div>
+        <div>Comment</div>
+        <input data-bind="value: comment" />
+    </div>
+    <br />
+    <div>
+        <input type="button" data-bind="enable: isReadyForSubmit, click: submitButtonClick" value="Submit" />
     </div>
 </div>

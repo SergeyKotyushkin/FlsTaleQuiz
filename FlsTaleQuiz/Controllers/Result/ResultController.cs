@@ -23,31 +23,31 @@ namespace FlsTaleQuiz.Controllers.Result
         [HttpPost]
         public string SaveResults(string name, string phone, string email, UserAnswer[] userAnswers)
         {
-            if (userAnswers != null && userAnswers.Length != 0)
+            if (userAnswers == null || userAnswers.Length == 0)
             {
-                var answers = _answerRepository.GetByIds(userAnswers.Select(i => i.AnswerId).Distinct());
-                if (answers == null)
-                {
-                    return JsonConvert.SerializeObject(new {HasErrors = true, MailSent = false},
-                        JsonSerializerSettings);
-                }
-
-                var answersArray = answers.ToArray();
-
-                var correctAnswers = answersArray.Where(a => a.IsValid).ToArray();
-                var countOfCorrectAnswers = correctAnswers.Length;
-                var result = new
-                {
-                    correctQuestionsIds = correctAnswers.Select(a => a.QuestionId),
-                    questionsIds = answersArray.Select(a => a.QuestionId),
-                    CountOfCorrectAnswers = countOfCorrectAnswers,
-                    Constants.Settings.CountOfQuestions
-                };
-
-                return JsonConvert.SerializeObject(new {result}, JsonSerializerSettings);
+                return JsonConvert.SerializeObject(new {HasErrors = true, MailSent = false}, JsonSerializerSettings);
             }
 
-            return JsonConvert.SerializeObject(new {Constants.Labels.ErrorMessage}, JsonSerializerSettings);
+            var answers = _answerRepository.GetByIds(userAnswers.Select(i => i.AnswerId).Distinct());
+            if (answers == null)
+            {
+                return JsonConvert.SerializeObject(new {HasErrors = true, MailSent = false},
+                    JsonSerializerSettings);
+            }
+
+            var answersArray = answers.ToArray();
+
+            var correctAnswers = answersArray.Where(a => a.IsValid).ToArray();
+            var countOfCorrectAnswers = correctAnswers.Length;
+            var result = new
+            {
+                correctQuestionsIds = correctAnswers.Select(a => a.QuestionId),
+                questionsIds = answersArray.Select(a => a.QuestionId),
+                CountOfCorrectAnswers = countOfCorrectAnswers,
+                Constants.Settings.CountOfQuestions
+            };
+
+            return JsonConvert.SerializeObject(new {result}, JsonSerializerSettings);
         }
     }
 }

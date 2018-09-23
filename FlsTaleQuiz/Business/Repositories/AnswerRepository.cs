@@ -58,9 +58,9 @@ namespace FlsTaleQuiz.Business.Repositories
                 answers.Add(new Answer
                 {
                     AnswerId = reader.GetInt32(0),
-                    QuestionId = reader.GetInt32(0),
-                    Text = reader.GetString(1),
-                    IsValid = reader.GetBoolean(2)
+                    QuestionId = reader.GetInt32(1),
+                    Text = reader.GetString(2),
+                    IsValid = reader.GetBoolean(3)
                 });
             };
         }
