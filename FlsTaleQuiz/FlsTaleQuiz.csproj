@@ -135,20 +135,16 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="Business\Constants\Constants.cs" />
-    <Compile Include="Business\Interfaces\IQuestionAnswerLinkDtoRepository.cs" />
-    <Compile Include="Business\Interfaces\IAnswerDtoRepository.cs" />
-    <Compile Include="Business\Interfaces\IQuestionDtoRepository.cs" />
+    <Compile Include="Business\Interfaces\IDataBaseService.cs" />
+    <Compile Include="Business\Interfaces\IAnswerRepository.cs" />
     <Compile Include="Business\Interfaces\IQuestionRepository.cs" />
     <Compile Include="Business\Models\Answer.cs" />
+    <Compile Include="Business\Models\QuestionAnswerDto.cs" />
     <Compile Include="Business\Models\UserAnswer.cs" />
-    <Compile Include="Business\Models\QuestionAnswerLinkDto.cs" />
-    <Compile Include="Business\Models\AnswerDto.cs" />
-    <Compile Include="Business\Models\QuestionDto.cs" />
     <Compile Include="Business\Models\Question.cs" />
-    <Compile Include="Business\Repositories\AnswerDtoRepositoryMock.cs" />
-    <Compile Include="Business\Repositories\QuestionAnswerLinkDtoRepositoryMock.cs" />
-    <Compile Include="Business\Repositories\QuestionDtoRepositoryMock.cs" />
-    <Compile Include="Business\Repositories\QuestionRepositoryMock.cs" />
+    <Compile Include="Business\Repositories\AnswerRepository.cs" />
+    <Compile Include="Business\Repositories\QuestionRepository.cs" />
+    <Compile Include="Business\Services\DataBaseService.cs" />
     <Compile Include="Controllers\Home\HomeController.cs" />
     <Compile Include="Controllers\Question\QuestionController.cs" />
     <Compile Include="Controllers\Result\ResultController.cs" />
@@ -165,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
+    <Content Include="connectionStrings.config" />
     <None Include="packages.config" />
     <Content Include="Views\_viewstart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -178,7 +175,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\Question\" />
     <Folder Include="Views\Result\" />
   </ItemGroup>

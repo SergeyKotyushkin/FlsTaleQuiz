@@ -32,7 +32,7 @@
 
         public static class Settings
         {
-            public static int CountOfQuestions = 10;
+            public static int CountOfQuestions = 3;
         }
     }
 }

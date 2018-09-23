@@ -3,8 +3,8 @@ using FlsTaleQuiz.Business.Models;
 
 namespace FlsTaleQuiz.Business.Interfaces
 {
-    public interface IAnswerDtoRepository
+    public interface IAnswerRepository
     {
-        IEnumerable<AnswerDto> GetByIds(IEnumerable<long> answersIds);
+        IEnumerable<Answer> GetByIds(IEnumerable<int> answersIds);
     }
 }

@@ -12,7 +12,7 @@
 
             var model = params && params.question || {};
 
-            self.id = model.id;
+            self.answerId = model.answerId;
             self.text = model.text;
             self.imageUrl = model.imageUrl;
             self.answers = model.answers || [];
@@ -42,7 +42,7 @@
                 return;
             }
 
-            self.addUserAnswer(self.id, selectedAnswerId);
+            self.addUserAnswer(self.answerId, selectedAnswerId);
             self.nextQuestionHandler();
         }
     }

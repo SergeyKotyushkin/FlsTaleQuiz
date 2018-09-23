@@ -16,6 +16,8 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 
+using FlsTaleQuiz.Business.Services;
+
 namespace FlsTaleQuiz.DependencyResolution {
     using FlsTaleQuiz.Business.Interfaces;
     using FlsTaleQuiz.Business.Repositories;
@@ -33,10 +35,9 @@ namespace FlsTaleQuiz.DependencyResolution {
 					scan.With(new ControllerConvention());
                 });
 
-            For<IQuestionRepository>().Use<QuestionRepositoryMock>();
-            For<IQuestionDtoRepository>().Use<QuestionDtoRepositoryMock>();
-            For<IAnswerDtoRepository>().Use<AnswerDtoRepositoryMock>();
-            For<IQuestionAnswerLinkDtoRepository>().Use<QuestionAnswerLinkDtoRepositoryMock>();
+            For<IDataBaseService>().Use<DataBaseService>();
+            For<IQuestionRepository>().Use<QuestionRepository>();
+            For<IAnswerRepository>().Use<AnswerRepository>();
         }
 
         #endregion

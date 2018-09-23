@@ -9,8 +9,8 @@
 <!-- /ko -->
 
 <div data-bind="foreach: {data: answers, as: 'answer'}">
-    <label data-bind="text: answer.text, attr: {for: answer.id}"></label>
-    <input type="radio" data-bind="value: answer.id, checked: $parent.selectedAnswerId, attr: {id: answer.id}"/>
+    <label data-bind="text: answer.text, attr: {for: answer.answerId}"></label>
+    <input type="radio" data-bind="value: answer.answerId, checked: $parent.selectedAnswerId, attr: {id: answer.answerId}"/>
     <hr/>
 </div>
 
