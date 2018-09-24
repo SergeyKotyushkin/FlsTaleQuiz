@@ -15,6 +15,7 @@
             self.userAnswers = params && params.userAnswers;
             self.showSubmit = params && params.showSubmit;
             self.addUserAnswer = params && params.addUserAnswer;
+            self.showModalErrorMessage = params && params.showModalErrorMessage;
 
             self.currentQuestion = ko.observable();
             self.currentQuestionNumber = ko.observable(0);
@@ -49,14 +50,11 @@
             self.loading(true);
             $.post('question/getRandom',
                     {
-                        excludedQuestionsIds: self.userAnswers().map(function
-                            _mapQuestionId(userAnswer) {
-                                return userAnswer.questionId;
-                            })
+                        excludedQuestionsIds: self.userAnswers().map(_mapQuestionId)
                     },
                     function _onSuccess(result) {
                         if (!result || !result.question) {
-                            alert('Ooops! Something goes wrong O_O');
+                            self.showModalErrorMessage('Ooops! Something goes wrong O_O');
                         }
 
                         self.currentQuestion(result.question);
@@ -65,11 +63,15 @@
                     'json'
                 )
                 .fail(function _onError() {
-                    alert('Ooops! Something goes wrong O_O');
+                    self.showModalErrorMessage('Ooops! Something goes wrong O_O');
                 })
                 .always(function _always() {
                     self.loading(false);
                 });
+        }
+
+        function _mapQuestionId(userAnswer) {
+            return userAnswer.questionId;
         }
 
         function _incrementCurrentQuestionNumber() {

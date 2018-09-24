@@ -1,7 +1,9 @@
 ﻿define([
-        'knockout'
+        'knockout',
+        'jquery',
+        'jquery.modal'
     ],
-    function quizViewModelModule(ko) {
+    function quizViewModelModule(ko, $) {
         'use strict';
 
         return QuizViewModel;
@@ -16,6 +18,9 @@
             self.isTestActive = ko.observable(false);
             self.isSubmitActive = ko.observable(false);
             self.isFinishActive = ko.observable(false);
+
+            self.modalErrorMessage = ko.observable();
+            self.showModalErrorMessage = _showModalErrorMessage.bind(self);
             
             self.userAnswers = ko.observableArray([]);
 
@@ -56,6 +61,13 @@
             var self = this;
 
             self.userAnswers.push({ questionId: questionId, answerId: answerId });
+        }
+
+        function _showModalErrorMessage(message) {
+            var self = this;
+
+            self.modalErrorMessage(message);
+            $("#modalError").modal();
         }
 
     }

@@ -106,6 +106,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\app.css" />
+    <Content Include="Content\css\jquery.modal.min.css" />
     <Content Include="Global.asax" />
     <Content Include="scripts\apps\quiz\components\intro\intro.html" />
     <Content Include="scripts\apps\quiz\components\intro\intro.js" />
@@ -123,6 +125,7 @@
     <Content Include="scripts\apps\quiz\setup\component-factory.js" />
     <Content Include="scripts\apps\quiz\setup\component-registrator.js" />
     <Content Include="scripts\vendor\jquery-3.3.1.min.js" />
+    <Content Include="scripts\vendor\plugins\jquery.modal.min.js" />
     <Content Include="scripts\vendor\knockout-3.4.2.js" />
     <Content Include="scripts\vendor\plugins\json.js" />
     <Content Include="scripts\vendor\plugins\knockout.validation.js" />

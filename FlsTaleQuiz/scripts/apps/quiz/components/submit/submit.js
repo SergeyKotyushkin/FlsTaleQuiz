@@ -19,6 +19,7 @@
             self.loading = params && params.loading;
             self.userAnswers = params && params.userAnswers || [];
             self.showFinish = params && params.showFinish;
+            self.showModalErrorMessage = params && params.showModalErrorMessage;
 
             self.isReadyForSubmit = ko.pureComputed(_isReadyForSubmit.bind(self));
 
@@ -81,18 +82,18 @@
                     function _onSuccess(response) {
                         if (response.hasErrors) {
                             if (response.usedEmail) {
-                                alert('Entered email has already been used. Try another one.');
+                                self.showModalErrorMessage('Entered email has already been used. Try another one.');
                                 return;
                             }
 
                             if (!response.mailSent) {
-                                alert('Ooops! Something goes wrong O_O');
+                                self.showModalErrorMessage('Ooops! Something goes wrong O_O');
                                 return;
                             }
 
                             // ? Mail was sent but results were not saved in db
                             //if (!response.mailSent) {
-                            //    alert('Ooops! Something goes wrong O_O');
+                            //    self.showModalErrorMessage('Ooops! Something goes wrong O_O');
                             //    return;
                             //}
                         }
@@ -103,7 +104,7 @@
                     'json'
                 )
                 .fail(function _onError() {
-                    alert('Ooops! Something goes wrong O_O');
+                    self.showModalErrorMessage('Ooops! Something goes wrong O_O');
                 })
                 .always(function _always() {
                     self.loading(false);
