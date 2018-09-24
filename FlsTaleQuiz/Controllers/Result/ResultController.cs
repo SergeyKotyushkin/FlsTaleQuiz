@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Linq;
 using System.Web.Mvc;
 using FlsTaleQuiz.Business.Constants;
 using FlsTaleQuiz.Business.Interfaces;
@@ -35,6 +36,12 @@ namespace FlsTaleQuiz.Controllers.Result
                 return JsonConvert.SerializeObject(new {HasErrors = true, MailSent = false}, JsonSerializerSettings);
             }
 
+            string errorJson;
+            if (!ValidateEmail(email, out errorJson))
+            {
+                return errorJson;
+            }
+
             var answers = _answerRepository.GetByIds(userAnswers.Select(i => i.AnswerId).Distinct());
             if (answers == null)
             {
@@ -42,33 +49,75 @@ namespace FlsTaleQuiz.Controllers.Result
                     JsonSerializerSettings);
             }
 
-            var emailCheck = _resultRepository.TestEmail(email);
-            if (!emailCheck.HasValue)
-            {
-                return JsonConvert.SerializeObject(new {HasErrors = true, MailSent = false}, JsonSerializerSettings);
-            }
-
-            if (!emailCheck.Value)
-            {
-                return JsonConvert.SerializeObject(new {HasErrors = true, MailSent = false, UsedEmail = true},
-                    JsonSerializerSettings);
-            }
-
             var answersArray = answers.ToArray();
             var correctAnswers = answersArray.Where(a => a.IsValid).ToArray();
             var countOfCorrectAnswers = correctAnswers.Length;
 
+            if (!TrySendMail(email, countOfCorrectAnswers, out errorJson))
+            {
+                return errorJson;
+            }
+
+            if (!TrySaveResult(email, name, phone, comment, answersArray, countOfCorrectAnswers, out errorJson))
+            {
+                return errorJson;
+            }
+
+            return JsonConvert.SerializeObject(new { }, JsonSerializerSettings);
+        }
+
+        private bool ValidateEmail(string email, out string errorJson)
+        {
+            errorJson = string.Empty;
+
+            var emailCheck = _resultRepository.TestEmail(email);
+            if (!emailCheck.HasValue)
+            {
+                errorJson =
+                    JsonConvert.SerializeObject(new {HasErrors = true, MailSent = false}, JsonSerializerSettings);
+                return false;
+            }
+
+            if (!emailCheck.Value)
+            {
+                errorJson = JsonConvert.SerializeObject(new {HasErrors = true, MailSent = false, UsedEmail = true},
+                    JsonSerializerSettings);
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool TrySendMail(string email, int countOfCorrectAnswers, out string errorJson)
+        {
+            errorJson = string.Empty;
+
             var isEmailSent = _mailService.Send(
                 $"Your results are: {countOfCorrectAnswers} correct answers of {Constants.Settings.CountOfQuestions} questions",
-                "FLS", 
-                email, 
+                "FLS quiz",
+                email,
                 "fls@support.com");
-            
+
             if (!isEmailSent)
             {
-                return JsonConvert.SerializeObject(new {HasErrors = true, MailSent = false, MailSendError = true},
+                errorJson = JsonConvert.SerializeObject(new {HasErrors = true, MailSent = false, MailSendError = true},
                     JsonSerializerSettings);
+                return false;
             }
+
+            return true;
+        }
+
+        private bool TrySaveResult(
+            string email, 
+            string name, 
+            string phone, 
+            string comment, 
+            IEnumerable answersArray,
+            int countOfCorrectAnswers, 
+            out string errorJson)
+        {
+            errorJson = string.Empty;
 
             var saveResult = _resultRepository.SaveResult(
                 email,
@@ -80,12 +129,14 @@ namespace FlsTaleQuiz.Controllers.Result
                 phone ?? string.Empty,
                 comment ?? string.Empty);
 
-            if (saveResult)
+            if (!saveResult)
             {
-                return JsonConvert.SerializeObject(new { }, JsonSerializerSettings);
+                errorJson = JsonConvert.SerializeObject(new {HasErrors = true, MailSent = true},
+                    JsonSerializerSettings);
+                return false;
             }
 
-            return JsonConvert.SerializeObject(new {HasErrors = true, MailSent = true}, JsonSerializerSettings);
+            return true;
         }
     }
 }
