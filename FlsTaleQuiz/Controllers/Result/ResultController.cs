@@ -15,11 +15,16 @@ namespace FlsTaleQuiz.Controllers.Result
 
         private readonly IAnswerRepository _answerRepository;
         private readonly IResultRepository _resultRepository;
+        private readonly IMailService _mailService;
 
-        public ResultController(IAnswerRepository answerRepository, IResultRepository resultRepository)
+        public ResultController(
+            IAnswerRepository answerRepository, 
+            IResultRepository resultRepository,
+            IMailService mailService)
         {
             _answerRepository = answerRepository;
             _resultRepository = resultRepository;
+            _mailService = mailService;
         }
 
         [HttpPost]
@@ -52,6 +57,18 @@ namespace FlsTaleQuiz.Controllers.Result
             var answersArray = answers.ToArray();
             var correctAnswers = answersArray.Where(a => a.IsValid).ToArray();
             var countOfCorrectAnswers = correctAnswers.Length;
+
+            var isEmailSent = _mailService.Send(
+                $"Your results are: {countOfCorrectAnswers} correct answers of {Constants.Settings.CountOfQuestions} questions",
+                "FLS", 
+                email, 
+                "fls@support.com");
+            
+            if (!isEmailSent)
+            {
+                return JsonConvert.SerializeObject(new {HasErrors = true, MailSent = false, MailSendError = true},
+                    JsonSerializerSettings);
+            }
 
             var saveResult = _resultRepository.SaveResult(
                 email,
