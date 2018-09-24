@@ -54,7 +54,7 @@
                     },
                     function _onSuccess(result) {
                         if (!result || !result.question) {
-                            self.showModalErrorMessage('Ooops! Something goes wrong O_O');
+                            self.showModalErrorMessage('Oops, something went wrong. Sorry for inconvenience.');
                         }
 
                         self.currentQuestion(result.question);
@@ -63,7 +63,7 @@
                     'json'
                 )
                 .fail(function _onError() {
-                    self.showModalErrorMessage('Ooops! Something goes wrong O_O');
+                    self.showModalErrorMessage('Oops, something went wrong. Sorry for inconvenience.');
                 })
                 .always(function _always() {
                     self.loading(false);
