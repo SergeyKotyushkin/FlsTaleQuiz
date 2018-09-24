@@ -43,5 +43,28 @@ namespace FlsTaleQuiz.Business.Services
                 return false;
             }
         }
+
+        public bool Execute(string storeProcedureName, SqlParameter[] sqlParameters)
+        {
+            try
+            {
+                using (var connection = new SqlConnection(_sqlConnectionString))
+                using (var command = new SqlCommand(storeProcedureName, connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddRange(sqlParameters);
+
+                    connection.Open();
+                    var affectedCount = command.ExecuteNonQuery();
+
+                    return affectedCount == 1;
+                }
+            }
+            catch (Exception exception)
+            {
+                return false;
+            }
+        }
     }
 }

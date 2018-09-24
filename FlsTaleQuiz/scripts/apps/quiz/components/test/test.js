@@ -56,7 +56,7 @@
                     },
                     function _onSuccess(result) {
                         if (!result || !result.question) {
-                            return;
+                            alert('Ooops! Something goes wrong O_O');
                         }
 
                         self.currentQuestion(result.question);
@@ -65,7 +65,7 @@
                     'json'
                 )
                 .fail(function _onError() {
-                    console.log('error');
+                    alert('Ooops! Something goes wrong O_O');
                 })
                 .always(function _always() {
                     self.loading(false);

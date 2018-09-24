@@ -38,6 +38,7 @@ namespace FlsTaleQuiz.DependencyResolution {
             For<IDataBaseService>().Use<DataBaseService>();
             For<IQuestionRepository>().Use<QuestionRepository>();
             For<IAnswerRepository>().Use<AnswerRepository>();
+            For<IResultRepository>().Use<ResultRepository>();
         }
 
         #endregion

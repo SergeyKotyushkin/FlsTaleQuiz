@@ -26,7 +26,7 @@
 
             return {
                 email: self.email,
-                name: self.firstName,
+                name: self.name,
                 phone: self.phone,
                 comment: self.comment,
                 submitButtonClick: submitButtonClick,
@@ -78,14 +78,32 @@
                         comment: self.comment(),
                         userAnswers: self.userAnswers()
                     },
-                    function _onSuccess(result) {
-                        console.log(JSON.stringify(result));
+                    function _onSuccess(response) {
+                        if (response.hasErrors) {
+                            if (response.usedEmail) {
+                                alert('Entered email has already been used. Try another one.');
+                                return;
+                            }
+
+                            if (!response.mailSent) {
+                                alert('Ooops! Something goes wrong O_O');
+                                return;
+                            }
+
+                            // ? Mail was sent but results were not saved in db
+                            //if (!response.mailSent) {
+                            //    alert('Ooops! Something goes wrong O_O');
+                            //    return;
+                            //}
+                        }
+
+                        console.log(JSON.stringify(response));
                         self.showFinish();
                     },
                     'json'
                 )
                 .fail(function _onError() {
-                    console.log('error');
+                    alert('Ooops! Something goes wrong O_O');
                 })
                 .always(function _always() {
                     self.loading(false);

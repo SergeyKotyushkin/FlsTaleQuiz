@@ -9,7 +9,7 @@ namespace FlsTaleQuiz.Business.Repositories
 {
     public class AnswerRepository : IAnswerRepository
     {
-        private const string SpGetRandomQuestion = "sp_GetAnswersByIds";
+        private const string SpGetAnswersByIds = "sp_GetAnswersByIds";
 
         private readonly IDataBaseService _dataBaseService;
 
@@ -26,7 +26,7 @@ namespace FlsTaleQuiz.Business.Repositories
 
             var answers = new List<Answer>(Constants.Constants.Settings.CountOfQuestions);
             if (!_dataBaseService.TryMapReadLines(
-                SpGetRandomQuestion,
+                SpGetAnswersByIds,
                 sqlParameters,
                 AnswersReaderAction(answers)))
             {

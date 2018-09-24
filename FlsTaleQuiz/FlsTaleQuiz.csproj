@@ -138,12 +138,14 @@
     <Compile Include="Business\Interfaces\IDataBaseService.cs" />
     <Compile Include="Business\Interfaces\IAnswerRepository.cs" />
     <Compile Include="Business\Interfaces\IQuestionRepository.cs" />
+    <Compile Include="Business\Interfaces\IResultRepository.cs" />
     <Compile Include="Business\Models\Answer.cs" />
     <Compile Include="Business\Models\QuestionAnswerDto.cs" />
     <Compile Include="Business\Models\UserAnswer.cs" />
     <Compile Include="Business\Models\Question.cs" />
     <Compile Include="Business\Repositories\AnswerRepository.cs" />
     <Compile Include="Business\Repositories\QuestionRepository.cs" />
+    <Compile Include="Business\Repositories\ResultRepository.cs" />
     <Compile Include="Business\Services\DataBaseService.cs" />
     <Compile Include="Controllers\Home\HomeController.cs" />
     <Compile Include="Controllers\Question\QuestionController.cs" />

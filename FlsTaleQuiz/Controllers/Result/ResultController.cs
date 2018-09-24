@@ -10,18 +10,20 @@ namespace FlsTaleQuiz.Controllers.Result
 {
     public class ResultController : Controller
     {
-        private JsonSerializerSettings JsonSerializerSettings =>
+        private static JsonSerializerSettings JsonSerializerSettings =>
             new JsonSerializerSettings {ContractResolver = new CamelCasePropertyNamesContractResolver()};
 
         private readonly IAnswerRepository _answerRepository;
+        private readonly IResultRepository _resultRepository;
 
-        public ResultController(IAnswerRepository answerRepository)
+        public ResultController(IAnswerRepository answerRepository, IResultRepository resultRepository)
         {
             _answerRepository = answerRepository;
+            _resultRepository = resultRepository;
         }
 
         [HttpPost]
-        public string SaveResults(string name, string phone, string email, UserAnswer[] userAnswers)
+        public string SaveResults(string email, string name, string phone, string comment, UserAnswer[] userAnswers)
         {
             if (userAnswers == null || userAnswers.Length == 0)
             {
@@ -35,19 +37,38 @@ namespace FlsTaleQuiz.Controllers.Result
                     JsonSerializerSettings);
             }
 
-            var answersArray = answers.ToArray();
+            var emailCheck = _resultRepository.TestEmail(email);
+            if (!emailCheck.HasValue)
+            {
+                return JsonConvert.SerializeObject(new {HasErrors = true, MailSent = false}, JsonSerializerSettings);
+            }
 
+            if (!emailCheck.Value)
+            {
+                return JsonConvert.SerializeObject(new {HasErrors = true, MailSent = false, UsedEmail = true},
+                    JsonSerializerSettings);
+            }
+
+            var answersArray = answers.ToArray();
             var correctAnswers = answersArray.Where(a => a.IsValid).ToArray();
             var countOfCorrectAnswers = correctAnswers.Length;
-            var result = new
-            {
-                correctQuestionsIds = correctAnswers.Select(a => a.QuestionId),
-                questionsIds = answersArray.Select(a => a.QuestionId),
-                CountOfCorrectAnswers = countOfCorrectAnswers,
-                Constants.Settings.CountOfQuestions
-            };
 
-            return JsonConvert.SerializeObject(new {result}, JsonSerializerSettings);
+            var saveResult = _resultRepository.SaveResult(
+                email,
+                JsonConvert.SerializeObject(new {answersArray}, JsonSerializerSettings),
+                countOfCorrectAnswers,
+                Constants.Settings.CountOfQuestions,
+                true,
+                name ?? string.Empty,
+                phone ?? string.Empty,
+                comment ?? string.Empty);
+
+            if (saveResult)
+            {
+                return JsonConvert.SerializeObject(new { }, JsonSerializerSettings);
+            }
+
+            return JsonConvert.SerializeObject(new {HasErrors = true, MailSent = true}, JsonSerializerSettings);
         }
     }
 }
