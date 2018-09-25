@@ -17,7 +17,7 @@
             _initValidation.call(self);
             
             self.loading = params && params.loading;
-            self.userAnswers = params && params.userAnswers || [];
+            self.userAnswersIds = params && params.userAnswersIds || [];
             self.showFinish = params && params.showFinish;
             self.showModalErrorMessage = params && params.showModalErrorMessage;
 
@@ -51,8 +51,8 @@
         function _isReadyForSubmit() {
             var self = this;
 
-            return self.userAnswers &&
-                ko.unwrap(self.userAnswers()).length &&
+            return self.userAnswersIds &&
+                ko.unwrap(self.userAnswersIds()).length &&
                 self.isValid();
         }
 
@@ -77,7 +77,7 @@
                         name: self.name(),
                         phone: self.phone(),
                         comment: self.comment(),
-                        userAnswers: self.userAnswers()
+                        userAnswersIds: self.userAnswersIds()
                     },
                     function _onSuccess(response) {
                         if (response.hasErrors) {
@@ -105,7 +105,6 @@
                             //}
                         }
 
-                        console.log(JSON.stringify(response));
                         self.showFinish();
                     },
                     'json'

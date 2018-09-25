@@ -2,6 +2,6 @@
     <div data-bind="text: 'Question #' + currentQuestionNumber() + ' of ' + countOfQuestions"></div>
     <br/>
     <!-- ko if: currentQuestion -->
-    <div data-bind='component: { name: "question", params: { question: currentQuestion(), nextQuestionHandler: nextQuestionClick, addUserAnswer: addUserAnswer } }'></div>
+    <div data-bind='component: { name: "question", params: { question: currentQuestion(), nextQuestionHandler: nextQuestionClick, addUserAnswerId: addUserAnswerId } }'></div>
     <!-- /ko -->
 </div>

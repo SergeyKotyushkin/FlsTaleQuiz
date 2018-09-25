@@ -9,9 +9,7 @@
             initialize: _initialize
         };
 
-        function _initialize(domElement, settings) {
-            console.log('Quiz App loaded');
-
+        function _initialize(domElement) {
             var quiz = new QuizViewModel();
 
             ko.applyBindings(quiz, document.getElementById(domElement));
