@@ -3,10 +3,10 @@
     <div data-bind='component: { name: "intro", params: { showTest: showTest } }'></div>
     <!-- /ko -->
     <!-- ko if: isTestActive -->
-    <div data-bind='component: { name: "test", params: { loading: loading, showModalErrorMessage: showModalErrorMessage, userAnswersIds: userAnswersIds, showSubmit: showSubmit, addUserAnswerId: addUserAnswerId } }'></div>
+    <div data-bind='component: { name: "test", params: { loading: loading, showModalErrorMessage: showModalErrorMessage, userAnswers: userAnswers, showSubmit: showSubmit, addUserAnswer: addUserAnswer } }'></div>
     <!-- /ko -->
     <!-- ko if: isSubmitActive -->
-    <div data-bind='component: { name: "submit", params: { loading: loading, showModalErrorMessage: showModalErrorMessage, userAnswersIds: userAnswersIds, showFinish: showFinish } }'></div>
+    <div data-bind='component: { name: "submit", params: { loading: loading, showModalErrorMessage: showModalErrorMessage, userAnswers: userAnswers, showFinish: showFinish } }'></div>
     <!-- /ko -->
     <!-- ko if: isFinishActive -->
     <div data-bind='component: { name: "finish" }'></div>

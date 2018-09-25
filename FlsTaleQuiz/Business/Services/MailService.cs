@@ -23,7 +23,7 @@ namespace FlsTaleQuiz.Business.Services
                         client.Send(mailMessage);
                         return true;
                     }
-                    catch (Exception)
+                    catch (Exception exception)
                     {
                         return false;
                     }

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using FlsTaleQuiz.Business.Constants;
 using FlsTaleQuiz.Business.Interfaces;
+using FlsTaleQuiz.Business.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -28,9 +29,9 @@ namespace FlsTaleQuiz.Controllers.Result
         }
 
         [HttpPost]
-        public string SaveResults(string email, string name, string phone, string comment, int[] userAnswersIds)
+        public string SaveResults(string email, string name, string phone, string comment, UserAnswer[] userAnswers)
         {
-            if (userAnswersIds == null || userAnswersIds.Length == 0)
+            if (userAnswers == null || userAnswers.Length == 0)
             {
                 return JsonConvert.SerializeObject(new {HasErrors = true, MailSent = false}, JsonSerializerSettings);
             }
@@ -41,7 +42,7 @@ namespace FlsTaleQuiz.Controllers.Result
                 return errorJson;
             }
 
-            var answers = _answerRepository.GetByIds(userAnswersIds);
+            var answers = _answerRepository.GetByIds(userAnswers.Select(i => i.AnswerId).Distinct());
             if (answers == null)
             {
                 return JsonConvert.SerializeObject(new {HasErrors = true, MailSent = false},

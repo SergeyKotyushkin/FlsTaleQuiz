@@ -22,12 +22,12 @@
             self.modalErrorMessage = ko.observable();
             self.showModalErrorMessage = _showModalErrorMessage.bind(self);
             
-            self.userAnswersIds = ko.observableArray([]);
+            self.userAnswers = ko.observableArray([]);
 
             self.showTest = _showTest.bind(self);
             self.showSubmit = _showSubmit.bind(self);
             self.showFinish = _showFinish.bind(self);
-            self.addUserAnswerId = _addUserAnswerId.bind(self);
+            self.addUserAnswer = _addUserAnswer.bind(self);
         }
 
         function _showTest() {
@@ -57,10 +57,10 @@
             self.isFinishActive(true);
         }
 
-        function _addUserAnswerId(answerId) {
+        function _addUserAnswer(questionId, answerId) {
             var self = this;
 
-            self.userAnswersIds.push(answerId);
+            self.userAnswers.push({ questionId: questionId, answerId: answerId });
         }
 
         function _showModalErrorMessage(message) {

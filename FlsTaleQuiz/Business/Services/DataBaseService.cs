@@ -38,7 +38,7 @@ namespace FlsTaleQuiz.Business.Services
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception exception)
             {
                 return false;
             }
@@ -61,7 +61,7 @@ namespace FlsTaleQuiz.Business.Services
                     return affectedCount == 1;
                 }
             }
-            catch (Exception)
+            catch (Exception exception)
             {
                 return false;
             }

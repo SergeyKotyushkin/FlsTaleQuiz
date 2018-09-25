@@ -16,7 +16,7 @@
             self.selectedAnswerId = ko.observable();
 
             self.nextQuestionHandler = params && params.nextQuestionHandler;
-            self.addUserAnswerId = params && params.addUserAnswerId;
+            self.addUserAnswer = params && params.addUserAnswer;
 
             var answerButtonClick = _answerButtonClick.bind(self);
 
@@ -37,7 +37,7 @@
                 return;
             }
 
-            self.addUserAnswerId(selectedAnswerId);
+            self.addUserAnswer(self.id, selectedAnswerId);
             self.nextQuestionHandler();
         }
     }

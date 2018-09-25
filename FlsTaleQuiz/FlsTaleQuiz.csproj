@@ -145,6 +145,7 @@
     <Compile Include="Business\Interfaces\IResultRepository.cs" />
     <Compile Include="Business\Models\Answer.cs" />
     <Compile Include="Business\Models\QuestionAnswerDto.cs" />
+    <Compile Include="Business\Models\UserAnswer.cs" />
     <Compile Include="Business\Models\Question.cs" />
     <Compile Include="Business\Repositories\AnswerRepository.cs" />
     <Compile Include="Business\Repositories\QuestionRepository.cs" />
@@ -181,6 +182,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Question\" />
+    <Folder Include="Views\Result\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

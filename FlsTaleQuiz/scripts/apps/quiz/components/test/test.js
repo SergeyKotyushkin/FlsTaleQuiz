@@ -12,9 +12,9 @@
             var settings = options && options.settings || {};
 
             self.loading = params && params.loading;
-            self.userAnswersIds = params && params.userAnswersIds;
+            self.userAnswers = params && params.userAnswers;
             self.showSubmit = params && params.showSubmit;
-            self.addUserAnswerId = params && params.addUserAnswerId;
+            self.addUserAnswer = params && params.addUserAnswer;
             self.showModalErrorMessage = params && params.showModalErrorMessage;
 
             self.currentQuestion = ko.observable();
@@ -27,7 +27,7 @@
             return {
                 nextQuestionClick: _nextQuestionClick.bind(self),
                 currentQuestion: self.currentQuestion,
-                addUserAnswerId: self.addUserAnswerId,
+                addUserAnswer: self.addUserAnswer,
                 currentQuestionNumber: self.currentQuestionNumber,
                 countOfQuestions: self.countOfQuestions
             };
@@ -50,7 +50,7 @@
             self.loading(true);
             $.post('question/getRandom',
                     {
-                        excludedQuestionsIds: self.userAnswersIds().map(_mapQuestionId)
+                        excludedQuestionsIds: self.userAnswers().map(_mapQuestionId)
                     },
                     function _onSuccess(result) {
                         if (!result || !result.question) {
