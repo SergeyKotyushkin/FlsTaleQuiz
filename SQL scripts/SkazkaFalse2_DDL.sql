@@ -1,3 +1,45 @@
+IF NOT EXISTS (SELECT 1 FROM sys.databases AS d WHERE d.name = 'SkazkaFalse2') CREATE DATABASE SkazkaFalse2;
+GO
+
+USE SkazkaFalse2;
+
+--IF OBJECT_ID('dbo.Results') IS NOT NULL DROP TABLE dbo.Results;
+IF OBJECT_ID('dbo.Answers') IS NOT NULL DROP TABLE dbo.Answers;
+IF OBJECT_ID('dbo.Questions') IS NOT NULL DROP TABLE dbo.Questions;
+
+CREATE TABLE dbo.Questions(
+	QID INT PRIMARY KEY,
+	Title NVARCHAR(1000) NOT NULL,
+	Img NVARCHAR(150) NOT NULL
+);
+
+CREATE TABLE dbo.Answers(
+	QID INT,
+	AID INT,
+	Valid BIT NOT NULL,
+	Title NVARCHAR(500) NOT NULL,
+	PRIMARY KEY(QID, AID),
+	FOREIGN KEY(QID) REFERENCES dbo.Questions(QID)
+);
+
+IF OBJECT_ID('dbo.Results') IS NULL
+BEGIN
+CREATE TABLE dbo.Results(
+	ID INT IDENTITY(1,1) PRIMARY KEY,
+	Email NVARCHAR(200) NOT NULL UNIQUE,
+	Answers NVARCHAR(1000) NOT NULL,
+	ValidCount INT NOT NULL,
+	TotalCount INT NOT NULL,
+	EmailSent BIT NOT NULL,
+	Nick NVARCHAR(200) NULL,
+	Phone NVARCHAR(25) NULL,
+	Comment NVARCHAR(2000) NULL
+);
+END;
+
+
+-- Stored procedures
+
 IF EXISTS(SELECT TOP 1 1 FROM sys.procedures WHERE NAME = 'sp_GetRandomQuestion')
 BEGIN
 	DROP PROCEDURE sp_GetRandomQuestion;

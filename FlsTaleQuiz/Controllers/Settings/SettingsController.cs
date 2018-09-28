@@ -14,7 +14,7 @@ namespace FlsTaleQuiz.Controllers.Settings
         {
             var settings = new
             {
-                Constants.Settings.CountOfQuestions
+                Config.Settings.CountOfQuestions
             };
 
             return JsonConvert.SerializeObject(new {settings}, JsonSerializerSettings);

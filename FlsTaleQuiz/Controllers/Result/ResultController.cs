@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 using FlsTaleQuiz.Business.Constants;
@@ -31,6 +32,7 @@ namespace FlsTaleQuiz.Controllers.Result
         [HttpPost]
         public string SaveResults(string email, string name, string phone, string comment, UserAnswer[] userAnswers)
         {
+            email = email.Trim().ToLower(CultureInfo.GetCultureInfo("ru-RU"));
             if (userAnswers == null || userAnswers.Length == 0)
             {
                 return JsonConvert.SerializeObject(new {HasErrors = true, MailSent = false}, JsonSerializerSettings);
@@ -55,10 +57,13 @@ namespace FlsTaleQuiz.Controllers.Result
 
             if (!TrySendMail(email, countOfCorrectAnswers, out errorJson))
             {
+                string trySaveResult;
+                TrySaveResult($"{email}(FAILED ON SENDING EMAIL)", name, phone, comment, false, answersArray, countOfCorrectAnswers, out trySaveResult);
+
                 return errorJson;
             }
 
-            if (!TrySaveResult(email, name, phone, comment, answersArray, countOfCorrectAnswers, out errorJson))
+            if (!TrySaveResult(email, name, phone, comment, true, answersArray, countOfCorrectAnswers, out errorJson))
             {
                 return errorJson;
             }
@@ -93,7 +98,7 @@ namespace FlsTaleQuiz.Controllers.Result
             errorJson = string.Empty;
 
             var isEmailSent = _mailService.Send(
-                $"Your results are: {countOfCorrectAnswers} correct answers of {Constants.Settings.CountOfQuestions} questions",
+                $"Your results are: {countOfCorrectAnswers} correct answers of {Config.Settings.CountOfQuestions} questions",
                 "FLS quiz",
                 email,
                 "fls@support.com");
@@ -112,7 +117,8 @@ namespace FlsTaleQuiz.Controllers.Result
             string email, 
             string name, 
             string phone, 
-            string comment, 
+            string comment,
+            bool emailSent,
             IEnumerable answersArray,
             int countOfCorrectAnswers, 
             out string errorJson)
@@ -123,8 +129,8 @@ namespace FlsTaleQuiz.Controllers.Result
                 email,
                 JsonConvert.SerializeObject(new {answersArray}, JsonSerializerSettings),
                 countOfCorrectAnswers,
-                Constants.Settings.CountOfQuestions,
-                true,
+                Config.Settings.CountOfQuestions,
+                emailSent,
                 name ?? string.Empty,
                 phone ?? string.Empty,
                 comment ?? string.Empty);

@@ -24,7 +24,7 @@ namespace FlsTaleQuiz.Business.Repositories
 
             var sqlParameters = new[] {new SqlParameter("@AnswersIdsTable", answersIdsTable)};
 
-            var answers = new List<Answer>(Constants.Constants.Settings.CountOfQuestions);
+            var answers = new List<Answer>(Constants.Config.Settings.CountOfQuestions);
             if (!_dataBaseService.TryMapReadLines(
                 SpGetAnswersByIds,
                 sqlParameters,
