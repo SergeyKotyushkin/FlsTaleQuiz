@@ -2,14 +2,14 @@
     'use strict';
 
     require.config({
-        baseUrl: './',
+        baseUrl: '/scripts',
         paths: {
-            'knockout': 'scripts/vendor/knockout-3.4.2',
-            'jquery': 'scripts/vendor/jquery-3.3.1.min',
-            'knockout.validation': 'scripts/vendor/plugins/knockout.validation',
-            'jquery.modal': 'scripts/vendor/plugins/jquery.modal.min',
-            'text': 'scripts/vendor/plugins/text',
-            'json': 'scripts/vendor/plugins/json'
+            'knockout': 'vendor/knockout-3.4.2',
+            'jquery': 'vendor/jquery-3.3.1.min',
+            'knockout.validation': 'vendor/plugins/knockout.validation',
+            'jquery.modal': 'vendor/plugins/jquery.modal.min',
+            'text': 'vendor/plugins/text',
+            'json': 'vendor/plugins/json'
         },
         shim: {
             'jquery.modal': {
@@ -19,9 +19,9 @@
     });
 
     require([
-            'scripts/apps/quiz/quiz.app',
-            'scripts/apps/quiz/setup/component-factory',
-            'scripts/apps/quiz/setup/component-registrator'
+            'apps/quiz/quiz.app',
+            'apps/quiz/setup/component-factory',
+            'apps/quiz/setup/component-registrator'
         ],
         function _(quizApp, componentFactory, componentRegistrator) {
 

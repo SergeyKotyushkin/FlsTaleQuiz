@@ -1,6 +1,6 @@
 ﻿define([
         'knockout',
-        'scripts/apps/quiz/quiz.vm'
+        'apps/quiz/quiz.vm'
     ],
     function quizAppModule(ko, QuizViewModel) {
         'use strict';

@@ -1,7 +1,7 @@
 ﻿define([
         'knockout',
         'jquery',
-        'json!settings/quizOptions'
+        'json!/settings/quizOptions'
     ],
     function(ko, $, options) {
         'use strict';
@@ -48,7 +48,7 @@
             var self = this;
 
             self.loading(true);
-            $.post('question/getRandom',
+            $.post('/question/getRandom',
                     {
                         excludedQuestionsIds: self.userAnswers().map(_mapQuestionId)
                     },

@@ -77,7 +77,7 @@
             var self = this;
 
             self.loading(true);
-            $.post('result/saveResults',
+            $.post('/result/saveResults',
                     {
                         email: self.email(),
                         name: self.name(),
@@ -105,14 +105,10 @@
                                 return;
                             }
 
-                            // ? Mail was sent but results were not saved in db
-                            //if (!response.mailSent) {
-                            //    self.showModalErrorMessage('Oops, something went wrong. Sorry for inconvenience.');
-                            //    return;
-                            //}
+                            self.showModalErrorMessage('Oops, something went wrong. Email has not been sent.');
+                            return;
                         }
 
-                        console.log(JSON.stringify(response));
                         self.showFinish();
                     },
                     'json'
