@@ -67,7 +67,7 @@
             var self = this;
 
             self.modalErrorMessage(message);
-            $("#modalError").modal();
+            $("#modalError").modal({ closeClass: 'icon-remove', closeText: '&times' });
         }
 
     }
