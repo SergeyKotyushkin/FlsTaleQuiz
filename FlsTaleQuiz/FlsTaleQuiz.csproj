@@ -107,8 +107,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\css\app.css" />
+    <Content Include="Content\css\styles.css" />
     <Content Include="Content\css\jquery.modal.min.css" />
+    <Content Include="Content\images\fls-logo.svg" />
     <Content Include="Global.asax" />
     <Content Include="scripts\apps\quiz\components\intro\intro.html" />
     <Content Include="scripts\apps\quiz\components\intro\intro.js" />

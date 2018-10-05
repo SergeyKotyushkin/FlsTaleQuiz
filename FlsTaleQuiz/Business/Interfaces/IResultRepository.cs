@@ -11,6 +11,7 @@
             int totalCount,
             bool emailSent,
             string name,
+            string stack,
             string phone,
             string comment);
     }

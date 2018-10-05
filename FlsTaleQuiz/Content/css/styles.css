@@ -97,7 +97,7 @@ div {
     text-indent: -9999px;
     width: 22rem;
     height: 6rem;
-    background: url("img/fls-logo.svg") no-repeat;
+    background: url("/content/images/fls-logo.svg") no-repeat;
     background-size: 100% auto;
 }
 
@@ -147,10 +147,12 @@ div {
 
     .polls-form li input {
         margin: 0 1rem 0 0;
+        cursor: pointer;
     }
 
     .polls-form li label {
         flex: 1;
+        cursor: pointer;
     }
 
     .polls-form li:first-child {
@@ -192,6 +194,7 @@ div {
     text-transform: uppercase;
     background-color: #0054a6;
     border-bottom: 2px solid #002d5a;
+    cursor: pointer;
 }
 
     .form-button:hover,
@@ -307,6 +310,37 @@ div {
     border: 1px solid #bbb;
 }
 
+.field-select[value=""] {
+    position: absolute;
+    display: block;
+    box-sizing: border-box;
+    font-size: 2.2rem;
+    line-height: 3rem;
+    padding: 0 1rem;
+    height: 4rem;
+    width: 100%;
+    border: 0;
+    outline: none;
+    border-bottom: 1px solid #bbb;
+    color: grey;
+}
+
+.field-select {
+    position: relative;
+    top: 4rem;
+    margin-top: -4rem;
+    display: block;
+    box-sizing: border-box;
+    font-size: 2.2rem;
+    line-height: 2rem;
+    padding: 0 1rem;
+    height: 4rem;
+    width: 100%;
+    border: 0;
+    outline: none;
+    border-bottom: 1px solid #bbb;
+}
+
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -352,6 +386,12 @@ input[type="number"] {
 .content-v-centered.w50 {
     width: 50%;
 }
+
+.field-error {
+    color: rgba(230, 30, 20, 0.9);
+}
+
+
 /* 
 =============================================================================
  Breakpoints
@@ -422,7 +462,7 @@ input[type="number"] {
     }
 
     .fields {
-        height: 50.6rem;
+        height: 56.6rem;
         padding-top: 3rem;
     }
 
@@ -497,6 +537,22 @@ input[type="number"] {
         width: 100%;
         outline: none;
         border: 1px solid #bbb;
+    }
+
+    .field-select[value=""] {
+        font-size: 1.6rem;
+        line-height: 3rem;
+        height: 3rem;
+        padding: 0 0.5rem;
+    }
+
+    .field-select {
+        top: 3rem;
+        margin-top: -3rem;
+        font-size: 1.6rem;
+        line-height: 2rem;
+        padding: 0 1rem;
+        height: 3rem;
     }
 
     .content-v-centered {

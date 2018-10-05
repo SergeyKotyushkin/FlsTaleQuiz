@@ -1,19 +1,18 @@
-﻿<div>
-    <img data-bind="attr: {src: 'content/images/' + imageUrl}"/>
-</div>
+﻿<div class="polls-form">
+    <!-- ko if: text.length -->
+        <div class="polls-form-header">
+            <h2 data-bind="text: text"></h2>
+        </div>
+    <!-- /ko -->
 
-<!-- ko if: text.length -->
-<div>
-    <p data-bind="text: text"></p>
-</div>
-<!-- /ko -->
-
-<div data-bind="foreach: {data: answers, as: 'answer'}">
-    <label data-bind="text: answer.text, attr: {for: answer.answerId}"></label>
-    <input type="radio" data-bind="value: answer.answerId, checked: $parent.selectedAnswerId, attr: {id: answer.answerId}"/>
-    <hr/>
-</div>
-
-<div>
-    <input type="button" data-bind="enable: selectedAnswerId, click: answerButtonClick" value="Answer"/>
+    <div class="polls-form-content indent-all">
+        <div class="polls-img-container"><img class="polls-img" alt="img" data-bind="attr: {src: 'content/images/' + imageUrl, alt: currentQuestionNumber() }"></div>
+        <div class="polls-counter"><span class="current" data-bind="text: currentQuestionNumber"></span> из <span data-bind="text: countOfQuestions"></span></div>
+        <ul class="polls-ul" data-bind="foreach: {data: answers, as: 'answer'}">
+            <li class="polls-li"><input type="radio" data-bind="value: answer.answerId, checked: $parent.selectedAnswerId, attr: {id: 'poll_' + answer.answerId}" /><label data-bind="attr: {for: 'poll_' + answer.answerId}, text: answer.text"></label></li>
+        </ul>
+        <div class="polls-buttons">
+            <input class="form-button" value="Продолжить" data-bind="enable: selectedAnswerId, click: answerButtonClick" />
+        </div>
+    </div>
 </div>

@@ -1,26 +1,35 @@
-﻿<div>
-    <div>
-        <div>Email<span>*</span></div>
-        <input data-bind="value: email" />
-        <div data-bind="validationMessage: email"></div>
-    </div>
-    <br />
-    <div>
-        <div>Name</div>
-        <input data-bind="value: name" />
-    </div>
-    <br />
-    <div>
-        <div>Phone</div>
-        <input data-bind="value: phone" />
-    </div>
-    <br />
-    <div>
-        <div>Comment</div>
-        <input data-bind="value: comment" />
-    </div>
-    <br />
-    <div>
-        <input type="button" data-bind="enable: isReadyForSubmit, click: submitButtonClick" value="Submit" />
+﻿<div class="content-v-centered indent-b w50">
+    <div class="bg-colored">
+        <div class="sign-up-form">
+            <h2>Регистрация</h2>
+            <div class="fields">
+                <div class="field">
+                    <label class="field-label" for="form-name">Имя *</label>
+                    <input class="field-input" type="text" data-bind="value: name" onkeyup="this.setAttribute('value', this.value);" value="" required placeholder="Имя…*" id="form-name">
+                </div>
+                <div class="form-tip field-error" data-bind="validationMessage: name"></div>
+                <div class="field">
+                    <label class="field-label" for="form-email">E-mail *</label>
+                    <input class="field-input" data-bind="value: email" onkeyup="this.setAttribute('value', this.value);" value="" placeholder="me@example.com…*" id="form-email">
+                </div>
+                <div class="form-tip field-error" data-bind="validationMessage: email"></div>
+                <div class="form-tip">Результаты будут отправлены на Ваш почтовый ящик</div>
+                <div class="field">
+                    <label class="field-label" for="form-stack">Стек технологий</label>
+                    <select class="field-select" id="form-stack" onchange="this.setAttribute('value', this.value);" value="" data-bind="value: stack, options: ['.NET','Java','Frontend','Mobile','Testing'], optionsCaption: 'Стек технологий'"></select>
+                </div>
+                <div class="field">
+                    <label class="field-label" for="form-phone">Телефон</label>
+                    <input class="field-input" type="number" data-bind="value: phone" onkeyup="this.setAttribute('value', this.value);" value="" placeholder="Телефон…" id="form-phone">
+                </div>
+                <div class="field margin-t">
+                    <label class="field-label" for="form-message">Сообщение</label>
+                    <textarea class="field-textarea" rows="10" cols="45" data-bind="value: comment" onkeyup="this.setAttribute('value', this.value);" value="" placeholder="Что знаю/умею/предпочитаю" id="form-message"></textarea>
+                </div>
+            </div>
+            <div class="sign-up-buttons">
+                <input class="form-button" data-bind="enable: isReadyForSubmit, click: submitButtonClick" value="Зарегистрироваться" />
+            </div>
+        </div>
     </div>
 </div>

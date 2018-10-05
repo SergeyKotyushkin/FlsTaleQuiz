@@ -1,7 +1,22 @@
-﻿<div>
-    <div data-bind="text: 'Question #' + currentQuestionNumber() + ' of ' + countOfQuestions"></div>
-    <br/>
-    <!-- ko if: currentQuestion -->
-    <div data-bind='component: { name: "question", params: { question: currentQuestion(), nextQuestionHandler: nextQuestionClick, addUserAnswer: addUserAnswer } }'></div>
-    <!-- /ko -->
+﻿<div class="content-v-centered indent-b">
+    <div class="bg-colored">
+
+        <!-- ko if: currentQuestion -->
+            <!-- ko component: { 
+                name: "question", 
+                params: { 
+                    question: currentQuestion(), 
+                    nextQuestionHandler: nextQuestionClick, 
+                    addUserAnswer: addUserAnswer, 
+                    currentQuestionNumber: currentQuestionNumber, 
+                    countOfQuestions: countOfQuestions 
+                } 
+            } -->
+            <!-- /ko -->
+        <!-- /ko -->
+    </div>
 </div>
+
+<!--<div>
+    <div data-bind="text: 'Question #' + currentQuestionNumber() + ' of ' + countOfQuestions"></div>
+</div>-->

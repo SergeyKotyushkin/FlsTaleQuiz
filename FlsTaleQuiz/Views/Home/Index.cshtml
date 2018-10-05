@@ -1,18 +1,17 @@
-﻿<div id="quiz-app">
-    <!-- ko if: isIntroActive -->
-    <div data-bind='component: { name: "intro", params: { showTest: showTest } }'></div>
-    <!-- /ko -->
-    <!-- ko if: isTestActive -->
-    <div data-bind='component: { name: "test", params: { loading: loading, showModalErrorMessage: showModalErrorMessage, userAnswers: userAnswers, showSubmit: showSubmit, addUserAnswer: addUserAnswer } }'></div>
-    <!-- /ko -->
-    <!-- ko if: isSubmitActive -->
-    <div data-bind='component: { name: "submit", params: { loading: loading, showModalErrorMessage: showModalErrorMessage, userAnswers: userAnswers, showFinish: showFinish } }'></div>
-    <!-- /ko -->
-    <!-- ko if: isFinishActive -->
-    <div data-bind='component: { name: "finish" }'></div>
-    <!-- /ko -->
-    <div id="modalError" class="modal">
-        <h3>Error</h3>
-        <p data-bind="text: modalErrorMessage"></p>
-    </div>
+﻿<!-- ko if: isIntroActive -->
+    <!-- ko component: { name: "intro", params: { showTest: showTest } } --><!-- /ko -->
+<!-- /ko -->
+<!-- ko if: isTestActive -->
+    <!-- ko component: { name: "test", params: { loading: loading, showModalErrorMessage: showModalErrorMessage, userAnswers: userAnswers, showSubmit: showSubmit, addUserAnswer: addUserAnswer } } --><!-- /ko -->
+<!-- /ko -->
+<!-- ko if: isSubmitActive -->
+    <!-- ko component: { name: "submit", params: { loading: loading, showModalErrorMessage: showModalErrorMessage, userAnswers: userAnswers, showFinish: showFinish } } --><!-- /ko -->
+<!-- /ko -->
+<!-- ko if: isFinishActive -->
+    <!-- ko component: { name: "finish" } --><!-- /ko -->
+<!-- /ko -->
+
+<div id="modalError" class="modal">
+    <h3>Error</h3>
+    <p data-bind="text: modalErrorMessage"></p>
 </div>

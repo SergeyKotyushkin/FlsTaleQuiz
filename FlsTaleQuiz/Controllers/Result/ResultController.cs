@@ -30,7 +30,7 @@ namespace FlsTaleQuiz.Controllers.Result
         }
 
         [HttpPost]
-        public string SaveResults(string email, string name, string phone, string comment, UserAnswer[] userAnswers)
+        public string SaveResults(string email, string name, string stack, string phone, string comment, UserAnswer[] userAnswers)
         {
             email = email.Trim().ToLower(CultureInfo.GetCultureInfo("ru-RU"));
             if (userAnswers == null || userAnswers.Length == 0)
@@ -58,12 +58,12 @@ namespace FlsTaleQuiz.Controllers.Result
             if (!TrySendMail(email, countOfCorrectAnswers, out errorJson))
             {
                 string trySaveResult;
-                TrySaveResult($"{email}(FAILED ON SENDING EMAIL)", name, phone, comment, false, answersArray, countOfCorrectAnswers, out trySaveResult);
+                TrySaveResult(email, name, stack, phone, comment, false, answersArray, countOfCorrectAnswers, out trySaveResult);
 
                 return errorJson;
             }
 
-            if (!TrySaveResult(email, name, phone, comment, true, answersArray, countOfCorrectAnswers, out errorJson))
+            if (!TrySaveResult(email, name, stack, phone, comment, true, answersArray, countOfCorrectAnswers, out errorJson))
             {
                 return errorJson;
             }
@@ -116,6 +116,7 @@ namespace FlsTaleQuiz.Controllers.Result
         private bool TrySaveResult(
             string email, 
             string name, 
+            string stack, 
             string phone, 
             string comment,
             bool emailSent,
@@ -132,12 +133,13 @@ namespace FlsTaleQuiz.Controllers.Result
                 Config.Settings.CountOfQuestions,
                 emailSent,
                 name ?? string.Empty,
+                stack ?? string.Empty,
                 phone ?? string.Empty,
                 comment ?? string.Empty);
 
             if (!saveResult)
             {
-                errorJson = JsonConvert.SerializeObject(new {HasErrors = true, MailSent = true},
+                errorJson = JsonConvert.SerializeObject(new {HasErrors = true, MailSent = emailSent},
                     JsonSerializerSettings);
                 return false;
             }

@@ -17,6 +17,8 @@
 
             self.nextQuestionHandler = params && params.nextQuestionHandler;
             self.addUserAnswer = params && params.addUserAnswer;
+            self.currentQuestionNumber = params && params.currentQuestionNumber;
+            self.countOfQuestions = params && params.countOfQuestions;
 
             var answerButtonClick = _answerButtonClick.bind(self);
 
@@ -25,7 +27,9 @@
                 imageUrl: self.imageUrl,
                 answers: self.answers,
                 selectedAnswerId: self.selectedAnswerId,
-                answerButtonClick: answerButtonClick
+                answerButtonClick: answerButtonClick,
+                countOfQuestions: self.countOfQuestions,
+                currentQuestionNumber: self.currentQuestionNumber
             };
         };
 

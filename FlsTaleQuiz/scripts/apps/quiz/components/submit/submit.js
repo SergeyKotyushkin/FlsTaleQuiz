@@ -11,6 +11,7 @@
 
             self.email = ko.observable();
             self.name = ko.observable();
+            self.stack = ko.observable();
             self.phone = ko.observable();
             self.comment = ko.observable();
 
@@ -28,6 +29,7 @@
             return {
                 email: self.email,
                 name: self.name,
+                stack: self.stack,
                 phone: self.phone,
                 comment: self.comment,
                 submitButtonClick: submitButtonClick,
@@ -40,9 +42,13 @@
             
             ko.validation.init({ insertMessages: false }, true);
             
+            self.name.extend({
+                required: { message: 'Имя должно быть заполнено!' }
+            });
+            
             self.email.extend({
-                required: { message: 'Email is required' },
-                email: { message: 'Email is incorrect' }
+                required: { message: 'Email должен быть заполнен!' },
+                email: { message: 'Некорректный Email!' }
             });
 
             self.errors = ko.validation.group(self);
@@ -75,6 +81,7 @@
                     {
                         email: self.email(),
                         name: self.name(),
+                        stack: self.stack(),
                         phone: self.phone(),
                         comment: self.comment(),
                         userAnswers: self.userAnswers()

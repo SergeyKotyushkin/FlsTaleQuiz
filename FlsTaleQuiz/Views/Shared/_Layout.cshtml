@@ -4,11 +4,17 @@
 <head>
     <title>FLS Tale Quiz!</title>
     <link rel="stylesheet" href="~/Content/css/jquery.modal.min.css"/>
-    <link rel="stylesheet" href="~/Content/css/app.css"/>
+    <link rel="stylesheet" href="~/Content/css/styles.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Arimo:400,700" rel="stylesheet">
 </head>
 <body>
-    <div>
-        @RenderBody()
+    <div class="container">
+        <div class="logo">
+            <a target="_blank" rel="noopener noreferrer" href="https://firstlinesoftware.ru"><div class="logo-img"></div></a>
+        </div>
+        <div id="quiz-app" class="content">
+            @RenderBody()
+        </div>
     </div>
     <script src="~/scripts/vendor/require.min.js"></script>
     <script src="~/scripts/apps/quiz/quiz.config.js"></script>

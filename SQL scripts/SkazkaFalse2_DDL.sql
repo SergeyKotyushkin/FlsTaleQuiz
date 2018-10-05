@@ -32,6 +32,7 @@ CREATE TABLE dbo.Results(
 	TotalCount INT NOT NULL,
 	EmailSent BIT NOT NULL,
 	Nick NVARCHAR(200) NULL,
+	Stack NVARCHAR(100) NULL,
 	Phone NVARCHAR(25) NULL,
 	Comment NVARCHAR(2000) NULL
 );
@@ -122,7 +123,7 @@ CREATE PROCEDURE sp_TestResultEmail(
 )
 AS
 BEGIN
-	SELECT COUNT(Email) AS EmailCount FROM Results WHERE Email = @Email
+	SELECT COUNT(Email) AS EmailCount FROM Results WHERE Email = @Email AND EmailSent = 1
 END
 GO
 PRINT 'Procedure sp_TestResultEmail created';
@@ -135,13 +136,14 @@ CREATE PROCEDURE sp_SaveTestResult(
 	@TotalCount INT,
 	@EmailSent BIT,
 	@Nick NVARCHAR(200),
+	@Stack NVARCHAR(100),
 	@Phone NVARCHAR(25),
 	@Comment NVARCHAR(2000)
 )
 AS
 BEGIN
-	INSERT INTO Results (Email, Answers, ValidCount, TotalCount, EmailSent, Nick, Phone, Comment)
-	VALUES (@Email, @Answers, @ValidCount, @TotalCount, @EmailSent, @Nick, @Phone, @Comment)
+	INSERT INTO Results (Email, Answers, ValidCount, TotalCount, EmailSent, Nick, Stack, Phone, Comment)
+	VALUES (@Email, @Answers, @ValidCount, @TotalCount, @EmailSent, @Nick, @Stack, @Phone, @Comment)
 END
 GO
 PRINT 'Procedure sp_SaveTestResult created';

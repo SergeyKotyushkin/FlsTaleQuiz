@@ -40,6 +40,7 @@ namespace FlsTaleQuiz.Business.Repositories
             int totalCount, 
             bool emailSent, 
             string name, 
+            string stack,
             string phone,
             string comment)
         {
@@ -51,6 +52,7 @@ namespace FlsTaleQuiz.Business.Repositories
                 new SqlParameter("@TotalCount", totalCount),
                 new SqlParameter("@EmailSent", emailSent),
                 new SqlParameter("@Nick", name),
+                new SqlParameter("@Stack", stack),
                 new SqlParameter("@Phone", phone),
                 new SqlParameter("@Comment", comment)
             };
