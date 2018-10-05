@@ -432,6 +432,11 @@ input[type="number"] {
     background: #fff;
     border: 1px solid #002d5a;
 }
+
+.loading {
+    color: #fff;
+    font-size: 2rem;
+}
 /* 
 =============================================================================
  Breakpoints
