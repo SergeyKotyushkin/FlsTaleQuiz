@@ -23,7 +23,7 @@ namespace FlsTaleQuiz.DependencyResolution {
     using FlsTaleQuiz.Business.Repositories;
     using StructureMap.Configuration.DSL;
     using StructureMap.Graph;
-	
+
     public class DefaultRegistry : Registry {
         #region Constructors and Destructors
 
@@ -32,7 +32,7 @@ namespace FlsTaleQuiz.DependencyResolution {
                 scan => {
                     scan.TheCallingAssembly();
                     scan.WithDefaultConventions();
-					scan.With(new ControllerConvention());
+                    scan.With(new ControllerConvention());
                 });
 
             For<IDataBaseService>().Use<DataBaseService>();

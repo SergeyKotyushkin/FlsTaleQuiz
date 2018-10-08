@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
@@ -18,15 +20,18 @@ namespace FlsTaleQuiz.Controllers.Result
         private readonly IAnswerRepository _answerRepository;
         private readonly IResultRepository _resultRepository;
         private readonly IMailService _mailService;
+        private readonly IMailGenerator _mailGenerator;
 
         public ResultController(
             IAnswerRepository answerRepository, 
             IResultRepository resultRepository,
-            IMailService mailService)
+            IMailService mailService,
+            IMailGenerator mailGenerator)
         {
             _answerRepository = answerRepository;
             _resultRepository = resultRepository;
             _mailService = mailService;
+            _mailGenerator = mailGenerator;
         }
 
         [HttpPost]
@@ -54,8 +59,11 @@ namespace FlsTaleQuiz.Controllers.Result
             var answersArray = answers.ToArray();
             var correctAnswers = answersArray.Where(a => a.IsValid).ToArray();
             var countOfCorrectAnswers = correctAnswers.Length;
+            var totalNumberOfQuestions = Config.Settings.CountOfQuestions;
+            var quizPassedThreshold = Config.Settings.QuizSuccessfulThreshold;
+            var passed = countOfCorrectAnswers >= quizPassedThreshold;
 
-            if (!TrySendMail(email, countOfCorrectAnswers, out errorJson))
+            if (!TrySendMail(email, name, passed, countOfCorrectAnswers, totalNumberOfQuestions, out errorJson))
             {
                 string trySaveResult;
                 TrySaveResult(email, name, stack, phone, comment, false, answersArray, countOfCorrectAnswers, out trySaveResult);
@@ -93,15 +101,28 @@ namespace FlsTaleQuiz.Controllers.Result
             return true;
         }
 
-        private bool TrySendMail(string email, int countOfCorrectAnswers, out string errorJson)
+        private bool TrySendMail(string email, string name, bool quizPassed, int countOfCorrectAnswers, int totalQuestions, out string errorJson)
         {
             errorJson = string.Empty;
 
-            var isEmailSent = _mailService.Send(
-                $"Your results are: {countOfCorrectAnswers} correct answers of {Config.Settings.CountOfQuestions} questions",
-                "FLS quiz",
-                email,
-                "fls@support.com");
+            var values = new List<Tuple<string, string>>
+                { Tuple.Create("%%email%%", email),
+                  Tuple.Create("%%name%%", name),
+                  Tuple.Create("%%correct_anwsers%%", countOfCorrectAnswers.ToString()),
+                  Tuple.Create("%%total_questions%%", totalQuestions.ToString())
+                };
+
+            var isEmailSent = false;
+            try
+            {
+                using (var message = _mailGenerator.Generate(values, quizPassed, email, countOfCorrectAnswers))
+                {
+                    isEmailSent = _mailService.Send(message);
+                }
+            }
+            catch (Exception e)
+            {
+            }
 
             if (!isEmailSent)
             {

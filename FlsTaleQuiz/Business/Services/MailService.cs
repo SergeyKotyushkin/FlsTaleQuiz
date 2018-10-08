@@ -6,30 +6,20 @@ namespace FlsTaleQuiz.Business.Services
 {
     public class MailService : IMailService
     {
-        public bool Send(string body, string subject, string toMail, string fromMail)
+        public bool Send(MailMessage mailMessage)
         {
-            using (var mailMessage = new MailMessage())
+            using (var client = new SmtpClient())
             {
-                mailMessage.From = new MailAddress(fromMail);
-                mailMessage.To.Add(new MailAddress(toMail));
-                mailMessage.Subject = subject;
-                mailMessage.Body = body;
-                mailMessage.IsBodyHtml = true;
-
-                using (var client = new SmtpClient())
+                try
                 {
-                    try
-                    {
-                        client.Send(mailMessage);
-                        return true;
-                    }
-                    catch (Exception exception)
-                    {
-                        return false;
-                    }
+                    client.Send(mailMessage);
+                    return true;
+                }
+                catch (Exception exception)
+                {
+                    return false;
                 }
             }
-
         }
     }
 }

@@ -79,6 +79,7 @@
 
         function _saveResults() {
             var self = this;
+            var genericErrorMsg = 'Упс, что-то пошло не так. Приносим наши извинения за причиненные неудобства. :(';
 
             self.loading(true);
             $.post('/result/saveResults',
@@ -93,23 +94,24 @@
                     function _onSuccess(response) {
                         if (response.hasErrors) {
                             if (response.usedEmail) {
-                                self.showModalErrorMessage('Entered email has already been used. Try another one.');
+                                self.showModalErrorMessage('Этот email уже участвовал. Чтобы отправить результаты повторно, нужно указать другой email.');
                                 return;
                             }
 
-                            if (response.MailSendError) {
-                                self.showModalErrorMessage('Oops, something went wrong. Email has not been sent.');
+                            var emailWasNotSent = 'Упс, что-то пошло не так. Письмо с результатами не было отправлено. :(';
+                            if (response.mailSendError) {
+                                self.showModalErrorMessage(emailWasNotSent);
                                 return;
                             }
 
                             if (!response.mailSent) {
-                                self.showModalErrorMessage(response.MailSendError
-                                    ? 'Oops, something went wrong. Email has not been sent.'
-                                    : 'Oops, something went wrong. Sorry for inconvenience.');
+                                self.showModalErrorMessage(response.mailSendError
+                                    ? emailWasNotSent
+                                    : genericErrorMsg);
                                 return;
                             }
 
-                            self.showModalErrorMessage('Oops, something went wrong. Email has not been sent.');
+                            self.showModalErrorMessage(emailWasNotSent);
                             return;
                         }
 
@@ -118,7 +120,7 @@
                     'json'
                 )
                 .fail(function _onError() {
-                    self.showModalErrorMessage('Oops, something went wrong. Sorry for inconvenience.');
+                    self.showModalErrorMessage(genericErrorMsg);
                 })
                 .always(function _always() {
                     self.loading(false);
