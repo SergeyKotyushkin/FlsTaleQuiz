@@ -107,6 +107,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\FailedEmailSubjectTemplate.txt" />
+    <Content Include="App_Data\FailedEmailTemplate.html" />
+    <Content Include="App_Data\PassedEmailSubjectTemplate.txt" />
+    <Content Include="App_Data\PassedEmailTemplate.html" />
     <Content Include="Content\css\font-arimo.css" />
     <Content Include="Content\css\styles.css" />
     <Content Include="Content\css\jquery.modal.min.css" />
@@ -154,6 +158,8 @@
     <Compile Include="Business\Repositories\QuestionRepository.cs" />
     <Compile Include="Business\Repositories\ResultRepository.cs" />
     <Compile Include="Business\Services\DataBaseService.cs" />
+    <Compile Include="Business\Interfaces\IMailGenerator.cs" />
+    <Compile Include="Business\Services\MailGenerator.cs" />
     <Compile Include="Business\Services\MailService.cs" />
     <Compile Include="Controllers\Home\HomeController.cs" />
     <Compile Include="Controllers\Question\QuestionController.cs" />
@@ -184,7 +190,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Views\Question\" />
     <Folder Include="Views\Result\" />
   </ItemGroup>
