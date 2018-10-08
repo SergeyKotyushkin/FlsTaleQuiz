@@ -15,9 +15,10 @@
                 <div class="form-tip field-error" data-bind="validationMessage: email"></div>
                 <div class="form-tip">Результаты будут отправлены на Ваш почтовый ящик</div>
                 <div class="field">
-                    <label class="field-label" for="form-stack">Стек технологий</label>
-                    <select class="field-select" id="form-stack" onchange="this.setAttribute('value', this.value);" value="" data-bind="value: stack, options: ['.NET','Java','Frontend','Mobile','Testing'], optionsCaption: 'Стек технологий'"></select>
+                    <label class="field-label" for="form-stack">Стек технологий *</label>
+                    <select class="field-select" id="form-stack" onchange="this.setAttribute('value', this.value);" value="" data-bind="value: stack, options: ['.NET','Java','Frontend','Mobile','Testing', 'Другое'], optionsCaption: 'Стек технологий…*'"></select>
                 </div>
+                <div class="form-tip field-error" data-bind="validationMessage: stack"></div>
                 <div class="field">
                     <label class="field-label" for="form-phone">Телефон</label>
                     <input class="field-input" type="number" data-bind="value: phone" onkeyup="this.setAttribute('value', this.value);" value="" placeholder="Телефон…" id="form-phone">
