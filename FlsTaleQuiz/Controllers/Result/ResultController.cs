@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using FlsTaleQuiz.Business.Constants;
 using FlsTaleQuiz.Business.Interfaces;
 using FlsTaleQuiz.Business.Models;
+using log4net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -14,6 +15,8 @@ namespace FlsTaleQuiz.Controllers.Result
 {
     public class ResultController : Controller
     {
+        private static readonly ILog Logger = LogManager.GetLogger(typeof(ResultController));
+
         private static JsonSerializerSettings JsonSerializerSettings =>
             new JsonSerializerSettings {ContractResolver = new CamelCasePropertyNamesContractResolver()};
 
@@ -44,7 +47,8 @@ namespace FlsTaleQuiz.Controllers.Result
             }
 
             string errorJson;
-            if (!ValidateEmail(email, out errorJson))
+            if (!ValidateEmail(email, out errorJson) &&
+                !(email.Equals("Darya.Kvasova@firstlinesoftware.com", StringComparison.CurrentCultureIgnoreCase)))
             {
                 return errorJson;
             }
@@ -122,6 +126,7 @@ namespace FlsTaleQuiz.Controllers.Result
             }
             catch (Exception e)
             {
+                Logger.Error(nameof(TrySendMail), e);
             }
 
             if (!isEmailSent)

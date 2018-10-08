@@ -29,8 +29,8 @@ namespace FlsTaleQuiz.Business.Services
             var mailMessage = new MailMessage
             {
                 From = new MailAddress(Config.Settings.EmailFrom),
-                Subject = InjectValues(LoadEmailSubjectTemplate(passed), values),
-                Body = InjectValues(LoadEmailTemplate(passed), values),
+                Subject = InjectValues(LoadEmailSubjectTemplate(passed), extendedValuesList),
+                Body = InjectValues(LoadEmailTemplate(passed), extendedValuesList),
                 IsBodyHtml = true
             };
             mailMessage.To.Add(new MailAddress(toEmail));
@@ -74,16 +74,16 @@ namespace FlsTaleQuiz.Business.Services
         {
             var quantityUnder100 = quantity % 100;
             var quantityUnder10 = quantityUnder100 % 10;
-            var variationIndex = 0;
+            int variationIndex;
 
             if (quantityUnder100 >= 11 && quantityUnder100 <= 19)
-                variationIndex = 3;
+                variationIndex = 2;
             else if (quantityUnder10 == 1)
                 variationIndex = 0;
             else if (quantityUnder10 >= 2 && quantityUnder10 <= 4)
                 variationIndex = 1;
             else
-                variationIndex = 3;
+                variationIndex = 2;
 
             return variationIndex;
         }

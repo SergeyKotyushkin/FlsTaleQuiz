@@ -3,12 +3,14 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using FlsTaleQuiz.Business.Interfaces;
+using log4net;
 
 namespace FlsTaleQuiz.Business.Services
 {
     public class DataBaseService : IDataBaseService
     {
         private readonly string _sqlConnectionString;
+        private static readonly ILog Logger = LogManager.GetLogger(typeof(DataBaseService));
 
         public DataBaseService()
         {
@@ -40,6 +42,7 @@ namespace FlsTaleQuiz.Business.Services
             }
             catch (Exception exception)
             {
+                Logger.Error(nameof(TryMapReadLines), exception);
                 return false;
             }
         }
@@ -63,6 +66,7 @@ namespace FlsTaleQuiz.Business.Services
             }
             catch (Exception exception)
             {
+                Logger.Error(nameof(Execute), exception);
                 return false;
             }
         }
