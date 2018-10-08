@@ -50,6 +50,10 @@
                 required: { message: 'Email должен быть заполнен!' },
                 email: { message: 'Некорректный Email!' }
             });
+            
+            self.stack.extend({
+                required: { message: 'Стек технологий должен быть заполнен!' }
+            });
 
             self.errors = ko.validation.group(self);
         }
