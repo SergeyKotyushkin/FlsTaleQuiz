@@ -2,7 +2,7 @@
 // Mobile first
 // ============================================================================= */
 html {
-    font-size: 62.5%;
+    font-size: 40%;
     height: 100%;
     touch-action: manipulation;
 }
@@ -46,8 +46,8 @@ h1 {
 }
 
 h2 {
-    font-size: 3rem;
-    line-height: 3.6rem;
+    font-size: 2.4rem;
+    line-height: 3rem;
     font-weight: bold;
     margin: 0;
     padding: 2rem;
@@ -196,6 +196,7 @@ div {
     background-color: #0054a6;
     border-bottom: 2px solid #002d5a;
     cursor: pointer;
+    text-align: center;
 }
 
     .form-button:hover,
@@ -211,7 +212,7 @@ div {
     padding: 2rem;
 }
 
-    .sign-up-form h2 {
+    .content-v-centered .sign-up-form h2 {
         padding: 0;
         margin: 2rem 1rem;
     }
@@ -384,10 +385,6 @@ input[type="number"] {
     background-color: white;
 }
 
-.content-v-centered.w50 {
-    width: 50%;
-}
-
 .field-error {
     color: rgba(230, 30, 20, 0.9);
 }
@@ -454,6 +451,8 @@ input[type="number"] {
 
 /* desktop-only */
 @media only screen and (min-width: 992px) {
+    html { font-size: 62.5%; }
+
     h2 {
         font-size: 1.8rem;
         line-height: 3rem;
@@ -603,6 +602,10 @@ input[type="number"] {
 
     .content-v-centered {
         width: 90%;
+    }
+
+    .content-v-centered.w50 {
+        width: 50%;
     }
 
     .bg-colored {

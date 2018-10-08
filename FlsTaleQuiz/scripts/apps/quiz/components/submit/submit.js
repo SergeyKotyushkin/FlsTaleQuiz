@@ -26,6 +26,8 @@
 
             var submitButtonClick = _submit.bind(self);
 
+            window.scrollTo(0, 0);
+
             return {
                 email: self.email,
                 name: self.name,

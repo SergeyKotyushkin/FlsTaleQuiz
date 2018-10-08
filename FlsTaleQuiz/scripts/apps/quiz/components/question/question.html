@@ -12,7 +12,7 @@
             <li class="polls-li"><input type="radio" data-bind="value: answer.answerId, checked: $parent.selectedAnswerId, attr: {id: 'poll_' + answer.answerId}" /><label data-bind="attr: {for: 'poll_' + answer.answerId}, text: answer.text"></label></li>
         </ul>
         <div class="polls-buttons">
-            <input type="button" class="form-button" value="Продолжить" data-bind="enable: selectedAnswerId, click: answerButtonClick" />
+            <input class="form-button" value="Продолжить" data-bind="enable: selectedAnswerId, click: answerButtonClick" />
         </div>
     </div>
 </div>
