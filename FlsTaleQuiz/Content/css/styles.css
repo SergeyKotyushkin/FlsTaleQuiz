@@ -106,6 +106,7 @@ div {
     height: calc(100% - 10.7rem);
     margin: 2rem;
     box-sizing: border-box;
+    text-align: center;
 }
 
 /* polls */
