@@ -566,7 +566,7 @@ input[type="number"] {
         width: 100%;
         outline: none;
         border: 1px solid #bbb;
-        /*margin-top: -3rem;
+        margin-top: -3rem;
     }
 
     .field-textarea {
