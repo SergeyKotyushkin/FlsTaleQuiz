@@ -22,6 +22,8 @@
 
             var answerButtonClick = _answerButtonClick.bind(self);
 
+            window.scrollTo(0, 0);
+
             return {
                 text: self.text,
                 imageUrl: self.imageUrl,

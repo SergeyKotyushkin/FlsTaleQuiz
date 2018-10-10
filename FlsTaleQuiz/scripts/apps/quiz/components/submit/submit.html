@@ -1,7 +1,7 @@
 ﻿<div class="content-v-centered indent-b w50">
     <div class="bg-colored">
         <div class="sign-up-form">
-            <h2>Регистрация</h2>
+            <h2>А ты молодец!<br>Заполни форму ниже, чтобы узнать количество верных и не очень ответов. 4 точных попадания, и подарок от First Line уже у тебя ;)</h2>
             <div class="fields">
                 <div class="field">
                     <label class="field-label" for="form-name">Имя *</label>
@@ -13,11 +13,12 @@
                     <input class="field-input" data-bind="value: email" onkeyup="this.setAttribute('value', this.value);" value="" placeholder="me@example.com…*" id="form-email">
                 </div>
                 <div class="form-tip field-error" data-bind="validationMessage: email"></div>
-                <div class="form-tip">Результаты будут отправлены на Ваш почтовый ящик</div>
+                <div class="form-tip">Результаты будут отправлены на указанный почтовый ящик</div>
                 <div class="field">
-                    <label class="field-label" for="form-stack">Стек технологий</label>
-                    <select class="field-select" id="form-stack" onchange="this.setAttribute('value', this.value);" value="" data-bind="value: stack, options: ['.NET','Java','Frontend','Mobile','Testing'], optionsCaption: 'Стек технологий'"></select>
+                    <label class="field-label" for="form-stack">Стек технологий *</label>
+                    <select class="field-select" id="form-stack" onchange="this.setAttribute('value', this.value);" value="" data-bind="value: stack, options: ['.NET','Java','Frontend','Mobile','Testing', 'Другое'], optionsCaption: 'Стек технологий…*'"></select>
                 </div>
+                <div class="form-tip field-error" data-bind="validationMessage: stack"></div>
                 <div class="field">
                     <label class="field-label" for="form-phone">Телефон</label>
                     <input class="field-input" type="number" data-bind="value: phone" onkeyup="this.setAttribute('value', this.value);" value="" placeholder="Телефон…" id="form-phone">
@@ -28,7 +29,7 @@
                 </div>
             </div>
             <div class="sign-up-buttons">
-                <input class="form-button" data-bind="click: submitButtonClick" value="Зарегистрироваться" />
+                <input class="form-button" data-bind="click: submitButtonClick" value="Отправить" />
             </div>
         </div>
     </div>

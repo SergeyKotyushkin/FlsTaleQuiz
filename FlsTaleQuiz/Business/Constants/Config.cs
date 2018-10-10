@@ -7,7 +7,11 @@ namespace FlsTaleQuiz.Business.Constants
     {
         public static class Settings
         {
-            public static int CountOfQuestions => Convert.ToByte(ConfigurationManager.AppSettings["NumberOfQuestionsInQuizSession"] ?? "8");
+            public static int CountOfQuestions => Convert.ToByte(ConfigurationManager.AppSettings["NumberOfQuestionsInQuizSession"] ?? "6");
+
+            public static int QuizSuccessfulThreshold => Convert.ToByte(ConfigurationManager.AppSettings["QuizSuccessfulThreshold"] ?? "4");
+
+            public static string EmailFrom => ConfigurationManager.AppSettings["EmailFrom"] ?? "";
         }
     }
 }

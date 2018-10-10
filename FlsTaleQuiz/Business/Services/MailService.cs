@@ -1,35 +1,29 @@
 ﻿using System;
 using System.Net.Mail;
 using FlsTaleQuiz.Business.Interfaces;
+using log4net;
 
 namespace FlsTaleQuiz.Business.Services
 {
     public class MailService : IMailService
     {
-        public bool Send(string body, string subject, string toMail, string fromMail)
-        {
-            using (var mailMessage = new MailMessage())
-            {
-                mailMessage.From = new MailAddress(fromMail);
-                mailMessage.To.Add(new MailAddress(toMail));
-                mailMessage.Subject = subject;
-                mailMessage.Body = body;
-                mailMessage.IsBodyHtml = true;
+        private static readonly ILog Logger = LogManager.GetLogger(typeof(MailService));
 
-                using (var client = new SmtpClient())
+        public bool Send(MailMessage mailMessage)
+        {
+            using (var client = new SmtpClient())
+            {
+                try
                 {
-                    try
-                    {
-                        client.Send(mailMessage);
-                        return true;
-                    }
-                    catch (Exception exception)
-                    {
-                        return false;
-                    }
+                    client.Send(mailMessage);
+                    return true;
+                }
+                catch (Exception exception)
+                {
+                    Logger.Error(nameof(Send), exception);
+                    return false;
                 }
             }
-
         }
     }
 }

@@ -46,6 +46,7 @@
 
         function _loadQuestion() {
             var self = this;
+            var genericErrorMsg = 'Упс, что-то пошло не так. Приносим наши извинения за причиненные неудобства. :(';
 
             self.loading(true);
             $.post('/question/getRandom',
@@ -54,7 +55,7 @@
                     },
                     function _onSuccess(result) {
                         if (!result || !result.question) {
-                            self.showModalErrorMessage('Oops, something went wrong. Sorry for inconvenience.');
+                            self.showModalErrorMessage(genericErrorMsg);
                         }
 
                         self.currentQuestion(result.question);
@@ -63,7 +64,7 @@
                     'json'
                 )
                 .fail(function _onError() {
-                    self.showModalErrorMessage('Oops, something went wrong. Sorry for inconvenience.');
+                    self.showModalErrorMessage(genericErrorMsg);
                 })
                 .always(function _always() {
                     self.loading(false);

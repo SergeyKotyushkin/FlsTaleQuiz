@@ -1,7 +1,9 @@
-﻿namespace FlsTaleQuiz.Business.Interfaces
+﻿using System.Net.Mail;
+
+namespace FlsTaleQuiz.Business.Interfaces
 {
     public interface IMailService
     {
-        bool Send(string body, string subject, string toMail, string fromMail);
+        bool Send(MailMessage mailMessage);
     }
 }
