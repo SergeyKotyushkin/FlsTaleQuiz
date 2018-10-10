@@ -195,6 +195,7 @@ div {
     background-color: #0054a6;
     border-bottom: 2px solid #002d5a;
     cursor: pointer;
+    text-align: center;
 }
 
     .form-button:hover,
@@ -277,6 +278,7 @@ div {
 
 .margin-t {
     margin-top: 6rem;
+    min-height: 16rem;
 }
 
 .field-textarea[value=""] {
@@ -565,7 +567,7 @@ input[type="number"] {
         width: 100%;
         outline: none;
         border: 1px solid #bbb;
-        margin-top: -3rem;
+        /*margin-top: -3rem;
     }
 
     .field-textarea {
