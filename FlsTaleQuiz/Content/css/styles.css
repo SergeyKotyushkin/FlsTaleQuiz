@@ -110,7 +110,6 @@ div {
 }
 
 /* polls */
-
 .polls-form {
     text-align: center;
 }
@@ -444,6 +443,20 @@ input[type="number"] {
 
 .centered-h {
     text-align: center;
+}
+
+.felix {
+    display: block;
+    width: 20rem;
+    height: 20rem;
+    margin: 0 auto;
+    background: url(/content/images/felix.svg) no-repeat;
+    background-size: contain;
+    padding-left: 22rem;
+}
+
+p.content-felix {
+    line-height: 2.4rem;
 }
 
 /* 
