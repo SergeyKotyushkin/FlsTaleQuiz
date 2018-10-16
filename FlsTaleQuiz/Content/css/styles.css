@@ -423,7 +423,7 @@ input[type="number"] {
     text-decoration: none;
     text-align: center;
     font-size: 2rem;
-    line-height: 2rem;
+    /*line-height: 2rem;*/
     border-radius: 2px;
     color: #fff;
     background: #0054a6;
@@ -633,6 +633,10 @@ p.content-felix {
 
     .bg-colored {
         box-shadow: 0 1rem 1rem #dde0e7;
+    }
+
+    .modal a.close-modal[class*="icon-"] {
+        line-height: 2rem;
     }
 }
 
