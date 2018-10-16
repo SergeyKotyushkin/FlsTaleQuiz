@@ -117,11 +117,13 @@ namespace FlsTaleQuiz.Controllers.Result
                 };
 
             var isEmailSent = false;
+            var errorWhenSendingEmail = false;
             try
             {
                 using (var message = _mailGenerator.Generate(values, quizPassed, email, countOfCorrectAnswers))
                 {
                     isEmailSent = _mailService.Send(message);
+                    errorWhenSendingEmail = !isEmailSent;
                 }
             }
             catch (Exception e)
@@ -131,7 +133,7 @@ namespace FlsTaleQuiz.Controllers.Result
 
             if (!isEmailSent)
             {
-                errorJson = JsonConvert.SerializeObject(new {HasErrors = true, MailSent = false, MailSendError = true},
+                errorJson = JsonConvert.SerializeObject(new {HasErrors = true, MailSent = false, MailSendError = errorWhenSendingEmail },
                     JsonSerializerSettings);
                 return false;
             }

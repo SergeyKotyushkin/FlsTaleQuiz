@@ -100,7 +100,7 @@
                                 return;
                             }
 
-                            var emailWasNotSent = 'Упс, что-то пошло не так. Письмо с результатами не было отправлено. :(';
+                            var emailWasNotSent = 'Упс, что-то пошло не так. Произошла ошибка при отправке письма с результатами по указанному адресу. :(';
                             if (response.mailSendError) {
                                 self.showModalErrorMessage(emailWasNotSent);
                                 return;
