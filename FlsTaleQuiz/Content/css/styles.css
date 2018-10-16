@@ -366,6 +366,7 @@ input[type="number"] {
 
     .content-v-centered h2 {
         padding: 1.6rem;
+        color: #0054a6;
     }
 
     .content-v-centered p {
@@ -457,6 +458,7 @@ input[type="number"] {
 
 p.content-felix {
     line-height: 2.4rem;
+    color: #0054a6;
 }
 
 /* 
