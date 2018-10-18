@@ -14,6 +14,7 @@
             self.loading = params && params.loading;
             self.userAnswers = params && params.userAnswers;
             self.showSubmit = params && params.showSubmit;
+            self.showIntro = params && params.showIntro;
             self.addUserAnswer = params && params.addUserAnswer;
             self.showModalErrorMessage = params && params.showModalErrorMessage;
 
@@ -55,7 +56,12 @@
                     },
                     function _onSuccess(result) {
                         if (!result || !result.question) {
-                            self.showModalErrorMessage(genericErrorMsg);
+                            self.showModalErrorMessage(genericErrorMsg, function() {
+                                if (self.currentQuestionNumber() === 0) {
+                                    self.showIntro();
+                                }
+                            });
+
                         }
 
                         self.currentQuestion(result.question);
@@ -64,7 +70,11 @@
                     'json'
                 )
                 .fail(function _onError() {
-                    self.showModalErrorMessage(genericErrorMsg);
+                    self.showModalErrorMessage(genericErrorMsg, function() {
+                        if (self.currentQuestionNumber() === 0) {
+                            self.showIntro();
+                        }
+                    });
                 })
                 .always(function _always() {
                     self.loading(false);

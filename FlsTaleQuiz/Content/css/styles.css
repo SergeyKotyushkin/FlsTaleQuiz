@@ -114,7 +114,7 @@ div {
     text-align: center;
 }
 
-.polls-form-header {
+.polls-form-header, .content-v-centered .polls-form-header h2 {
     background-color: #0054a6;
     color: white;
 }

@@ -21,7 +21,8 @@
     require([
             'apps/quiz/quiz.app',
             'apps/quiz/setup/component-factory',
-            'apps/quiz/setup/component-registrator'
+            'apps/quiz/setup/component-registrator',
+            'components'
         ],
         function _(quizApp, componentFactory, componentRegistrator) {
 

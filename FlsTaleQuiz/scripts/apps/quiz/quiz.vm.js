@@ -24,10 +24,20 @@
             
             self.userAnswers = ko.observableArray([]);
 
+            self.showIntro = _showIntro.bind(self);
             self.showTest = _showTest.bind(self);
             self.showSubmit = _showSubmit.bind(self);
             self.showFinish = _showFinish.bind(self);
             self.addUserAnswer = _addUserAnswer.bind(self);
+        }
+
+        function _showIntro() {
+            var self = this;
+
+            self.isIntroActive(true);
+            self.isSubmitActive(false);
+            self.isFinishActive(false);
+            self.isTestActive(false);
         }
 
         function _showTest() {
@@ -63,12 +73,17 @@
             self.userAnswers.push({ questionId: questionId, answerId: answerId });
         }
 
-        function _showModalErrorMessage(message) {
+        function _showModalErrorMessage(message, closeCallback) {
             var self = this;
 
             self.modalErrorMessage(message);
+            if (closeCallback)
+                $('#modalError').on($.modal.AFTER_CLOSE, function(event, modal) {
+                    $('#modalError').off($.modal.AFTER_CLOSE);
+                    closeCallback(event, modal);
+                });
+
             $("#modalError").modal({ closeClass: 'icon-remove', closeText: '&times' });
         }
-
     }
 );
