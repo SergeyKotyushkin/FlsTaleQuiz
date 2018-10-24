@@ -34,10 +34,10 @@
         function _showIntro() {
             var self = this;
 
-            self.isIntroActive(true);
             self.isSubmitActive(false);
             self.isFinishActive(false);
             self.isTestActive(false);
+            self.isIntroActive(true);
         }
 
         function _showTest() {
@@ -80,7 +80,7 @@
             if (closeCallback)
                 $('#modalError').on($.modal.AFTER_CLOSE, function(event, modal) {
                     $('#modalError').off($.modal.AFTER_CLOSE);
-                    closeCallback(event, modal);
+                    window.setTimeout(function() { closeCallback(event, modal); }, 0);
                 });
 
             $("#modalError").modal({ closeClass: 'icon-remove', closeText: '&times' });

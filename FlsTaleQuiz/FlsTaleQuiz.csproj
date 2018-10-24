@@ -121,6 +121,7 @@
     <Content Include="Content\images\felix.svg" />
     <Content Include="Content\images\fls-logo.svg" />
     <Content Include="Global.asax" />
+    <Content Include="scripts\apps\quiz\components\components-bundle.js" />
     <Content Include="scripts\apps\quiz\components\intro\intro.html" />
     <Content Include="scripts\apps\quiz\components\intro\intro.js" />
     <Content Include="scripts\apps\quiz\components\finish\finish.html" />
@@ -188,6 +189,7 @@
     <Content Include="Views\_viewstart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\Publish_to_filesystem.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
