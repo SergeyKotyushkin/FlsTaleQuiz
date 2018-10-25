@@ -11,7 +11,7 @@ namespace FlsTaleQuiz.Business.Constants
 
             public static int QuizSuccessfulThreshold => Convert.ToByte(ConfigurationManager.AppSettings["QuizSuccessfulThreshold"] ?? "4");
 
-            public static string EmailFrom => ConfigurationManager.AppSettings["EmailFrom"] ?? "";
+            public static string ReplyTo => ConfigurationManager.AppSettings["ReplyTo"] ?? "";
         }
     }
 }

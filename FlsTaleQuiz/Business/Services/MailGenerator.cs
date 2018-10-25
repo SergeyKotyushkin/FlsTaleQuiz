@@ -28,12 +28,12 @@ namespace FlsTaleQuiz.Business.Services
 
             var mailMessage = new MailMessage
             {
-                From = new MailAddress(Config.Settings.EmailFrom),
                 Subject = InjectValues(LoadEmailSubjectTemplate(passed), extendedValuesList),
                 Body = InjectValues(LoadEmailTemplate(passed), extendedValuesList),
                 IsBodyHtml = true
             };
             mailMessage.To.Add(new MailAddress(toEmail));
+            mailMessage.ReplyToList.Add(Config.Settings.ReplyTo);
             return mailMessage;
         }
 
