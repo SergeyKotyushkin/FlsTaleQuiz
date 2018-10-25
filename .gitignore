@@ -4,3 +4,4 @@ bin
 obj
 *.user
 FlsTaleQuiz/App_Data/*.log
+FlsTaleQuiz/App_Data/log/
