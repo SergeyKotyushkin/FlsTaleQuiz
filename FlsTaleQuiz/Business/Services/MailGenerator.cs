@@ -12,7 +12,7 @@ namespace FlsTaleQuiz.Business.Services
 {
     public class MailGenerator : IMailGenerator
     {
-        public MailMessage Generate(IList<Tuple<string, string>> values, bool passed, string toEmail, int quantity)
+        public MailMessage Generate(IList<Tuple<string, string>> values, PassGrade grade, string toEmail, int quantity)
         {
             var variationIndex = SelectWordVariationIndex(quantity);
             var otvet = MailGenerator.Otvet[variationIndex];
@@ -28,8 +28,8 @@ namespace FlsTaleQuiz.Business.Services
 
             var mailMessage = new MailMessage
             {
-                Subject = InjectValues(LoadEmailSubjectTemplate(passed), extendedValuesList),
-                Body = InjectValues(LoadEmailTemplate(passed), extendedValuesList),
+                Subject = InjectValues(LoadEmailSubjectTemplate(grade), extendedValuesList),
+                Body = InjectValues(LoadEmailTemplate(grade), extendedValuesList),
                 IsBodyHtml = true
             };
             mailMessage.To.Add(new MailAddress(toEmail));
@@ -37,20 +37,28 @@ namespace FlsTaleQuiz.Business.Services
             return mailMessage;
         }
 
-        private static string LoadEmailSubjectTemplate(bool passed)
+        private static string LoadEmailSubjectTemplate(PassGrade grade)
         {
-            var templateFileName = passed
-                ? "/App_Data/PassedEmailSubjectTemplate.txt"
-                : "/App_Data/FailedEmailSubjectTemplate.txt";
+            string templateFileName = null;
+            if (grade == PassGrade.Passed)
+                templateFileName = "/App_Data/PassedEmailSubjectTemplate.txt";
+            else if (grade == PassGrade.Failed)
+                templateFileName = "/App_Data/FailedEmailSubjectTemplate.txt";
+            else if (grade == PassGrade.Zero)
+                templateFileName = "/App_Data/ZeroLevelEmailSubjectTemplate.txt";
 
             return File.ReadAllText(HostingEnvironment.MapPath(templateFileName));
         }
 
-        private static string LoadEmailTemplate(bool passed)
+        private static string LoadEmailTemplate(PassGrade grade)
         {
-            var templateFileName = passed
-                ? "/App_Data/PassedEmailTemplate.html"
-                : "/App_Data/FailedEmailTemplate.html";
+            string templateFileName = null;
+            if (grade == PassGrade.Passed)
+                templateFileName = "/App_Data/PassedEmailTemplate.html";
+            else if (grade == PassGrade.Failed)
+                templateFileName = "/App_Data/FailedEmailTemplate.html";
+            else if (grade == PassGrade.Zero)
+                templateFileName = "/App_Data/ZeroLevelEmailTemplate.html";
 
             return File.ReadAllText(HostingEnvironment.MapPath(templateFileName));
         }

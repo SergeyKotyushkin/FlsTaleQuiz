@@ -66,8 +66,9 @@ namespace FlsTaleQuiz.Controllers.Result
             var totalNumberOfQuestions = Config.Settings.CountOfQuestions;
             var quizPassedThreshold = Config.Settings.QuizSuccessfulThreshold;
             var passed = countOfCorrectAnswers >= quizPassedThreshold;
+            var passGrade = passed ? PassGrade.Passed : (countOfCorrectAnswers > 0 ? PassGrade.Failed : PassGrade.Zero);
 
-            if (!TrySendMail(email, name, passed, countOfCorrectAnswers, totalNumberOfQuestions, out errorJson))
+            if (!TrySendMail(email, name, passGrade, countOfCorrectAnswers, totalNumberOfQuestions, out errorJson))
             {
                 string trySaveResult;
                 TrySaveResult(email, name, stack, phone, comment, false, answersArray, countOfCorrectAnswers, out trySaveResult);
@@ -105,7 +106,7 @@ namespace FlsTaleQuiz.Controllers.Result
             return true;
         }
 
-        private bool TrySendMail(string email, string name, bool quizPassed, int countOfCorrectAnswers, int totalQuestions, out string errorJson)
+        private bool TrySendMail(string email, string name, PassGrade passGrade, int countOfCorrectAnswers, int totalQuestions, out string errorJson)
         {
             errorJson = string.Empty;
 
@@ -120,7 +121,7 @@ namespace FlsTaleQuiz.Controllers.Result
             var errorWhenSendingEmail = false;
             try
             {
-                using (var message = _mailGenerator.Generate(values, quizPassed, email, countOfCorrectAnswers))
+                using (var message = _mailGenerator.Generate(values, passGrade, email, countOfCorrectAnswers))
                 {
                     isEmailSent = _mailService.Send(message);
                     errorWhenSendingEmail = !isEmailSent;

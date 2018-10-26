@@ -10,12 +10,11 @@
                 <div class="form-tip field-error" data-bind="validationMessage: name"></div>
                 <div class="field">
                     <label class="field-label" for="form-email">E-mail *</label>
-                    <input class="field-input" data-bind="value: email" onkeyup="this.setAttribute('value', this.value);" value="" placeholder="me@example.com…*" id="form-email">
+                    <input class="field-input" data-bind="value: email" onkeydown="return event.key != ' '" onkeyup="this.setAttribute('value', this.value);" value="" placeholder="me@example.com…*" id="form-email">
                 </div>
                 <div class="form-tip field-error" data-bind="validationMessage: email"></div>
                 <div class="form-tip">Результаты будут отправлены на указанный почтовый ящик</div>
                 <div class="field">
-                    <label class="field-label" for="form-stack">Стек технологий *</label>
                     <select class="field-select" id="form-stack" onchange="this.setAttribute('value', this.value);" value="" data-bind="value: stack, options: ['.NET','Java','Frontend','Mobile','Testing', 'Другое'], optionsCaption: 'Стек технологий…*'"></select>
                 </div>
                 <div class="form-tip field-error" data-bind="validationMessage: stack"></div>

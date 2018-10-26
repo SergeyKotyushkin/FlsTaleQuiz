@@ -312,7 +312,7 @@ div {
 }
 
 .field-select[value=""] {
-    position: absolute;
+    position: relative;
     display: block;
     box-sizing: border-box;
     font-size: 2.2rem;
